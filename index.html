@@ -9,7 +9,7 @@
 <title>ALAMIN | Personal Portfolio</title>
 
 <style>
-:root {
+:root{
   --bg:#0b0d12;
   --card:#151b24;
   --lime:#c6ff5e;
@@ -22,7 +22,7 @@ html{scroll-behavior:smooth}
 body{
   background:radial-gradient(circle at top right,#1b2b29,transparent 35%),var(--bg);
   color:var(--text);
-  font-family:Arial, sans-serif;
+  font-family:Arial,sans-serif;
   line-height:1.7;
 }
 a{text-decoration:none;color:inherit}
@@ -33,33 +33,25 @@ nav{
   backdrop-filter:blur(15px);
   border-bottom:1px solid var(--border);
 }
-.nav{
-  min-height:70px;display:flex;
-  justify-content:space-between;align-items:center;
-}
+.nav{min-height:70px;display:flex;justify-content:space-between;align-items:center}
 .logo{font-size:23px;font-weight:900;letter-spacing:2px}
 .logo span{color:var(--lime)}
 .links{display:flex;gap:22px;font-size:13px}
 .links a:hover{color:var(--lime)}
 .menu{
   display:none;background:none;color:white;
-  border:1px solid var(--border);padding:8px 13px;
-  border-radius:8px;
+  border:1px solid var(--border);padding:8px 13px;border-radius:8px;
 }
 section{padding:85px 0;scroll-margin-top:75px}
-.tagline{
-  color:var(--lime);font-size:12px;
-  letter-spacing:3px;font-weight:bold;
-}
+.tagline{color:var(--lime);font-size:12px;letter-spacing:3px;font-weight:bold}
 h1{font-size:clamp(42px,7vw,75px);line-height:1.1}
 h2{font-size:clamp(30px,5vw,45px);margin:12px 0}
 h3{margin:8px 0;font-size:20px}
 p{color:var(--muted)}
 .highlight{color:var(--lime)}
 .btn{
-  display:inline-block;padding:12px 20px;
-  border:1px solid var(--border);border-radius:12px;
-  font-weight:bold;font-size:13px;margin:8px 6px 0 0;
+  display:inline-block;padding:12px 20px;border:1px solid var(--border);
+  border-radius:12px;font-weight:bold;font-size:13px;margin:8px 6px 0 0;
   transition:.3s;
 }
 .btn:hover{transform:translateY(-4px)}
@@ -68,98 +60,62 @@ p{color:var(--muted)}
 .id-card{
   max-width:720px;margin:auto;padding:25px;
   background:linear-gradient(130deg,#202c31,#141820);
-  border:1px solid rgba(198,255,94,.35);
-  border-radius:25px;
+  border:1px solid rgba(198,255,94,.35);border-radius:25px;
   box-shadow:0 20px 65px #0008;
 }
-.id-top{display:flex;justify-content:space-between;gap:10px;
-  border-bottom:1px solid var(--border);padding-bottom:15px}
+.id-top{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--border);padding-bottom:15px}
 .id-content{display:flex;align-items:center;gap:22px;padding-top:20px}
 .id-photo{
-  width:125px;height:140px;object-fit:cover;
-  object-position:center 25%;border-radius:17px;
-  border:2px solid var(--lime);
+  width:125px;height:140px;object-fit:cover;object-position:center 25%;
+  border-radius:17px;border:2px solid var(--lime);
 }
 .id-name{font-size:32px;font-weight:900}
 .id-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:15px}
 .meta{background:#ffffff0c;padding:9px;border-radius:10px}
 .meta small{display:block;color:var(--muted);font-size:10px}
 .meta b{font-size:14px}
-.hero{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:35px;align-items:center;
-}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center}
 .hero p{font-size:16px;margin-top:15px}
 .walk-box{
-  height:470px;display:flex;align-items:flex-end;
-  justify-content:center;overflow:hidden;
-  background:radial-gradient(ellipse,#36483b,#18201f 65%,#121720);
-  border:1px solid var(--border);border-radius:28px;
-  position:relative;
+  height:470px;display:flex;align-items:flex-end;justify-content:center;
+  overflow:hidden;background:radial-gradient(ellipse,#36483b,#18201f 65%,#121720);
+  border:1px solid var(--border);border-radius:28px;position:relative;
 }
 .walk-box:after{
   content:"";position:absolute;bottom:0;width:80%;height:2px;
-  background:var(--lime);box-shadow:0 0 25px var(--lime);
+  background:var(--lime);box-shadow:0 0 25px var(--lime);pointer-events:none;
 }
-.walk-img{
-  width:90%;height:95%;object-fit:contain;
-  object-position:center bottom;
-  animation:walk 2.5s ease-in-out infinite;
-}
-@keyframes walk{
-  0%,100%{transform:translateY(0) scale(1)}
-  50%{transform:translateY(-8px) scale(1.015)}
+.walk-video{
+  width:90%;height:95%;object-fit:contain;object-position:center bottom;
+  display:block;position:relative;z-index:1;
 }
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
 .card{
   padding:24px;background:linear-gradient(145deg,#1b222c,#12171e);
-  border:1px solid var(--border);border-radius:20px;
-  transition:.3s;
+  border:1px solid var(--border);border-radius:20px;transition:.3s;
 }
-.card:hover{
-  transform:translateY(-7px);
-  border-color:var(--lime);
-  box-shadow:0 15px 40px #0005;
-}
+.card:hover{transform:translateY(-7px);border-color:var(--lime);box-shadow:0 15px 40px #0005}
 .number{color:var(--lime);font-size:12px;letter-spacing:2px}
 .card p{font-size:14px}
-.about{
-  display:grid;grid-template-columns:.8fr 1.2fr;
-  gap:35px;align-items:center;
-}
-.about-img{
-  width:100%;height:420px;object-fit:cover;
-  object-position:center 20%;border-radius:25px;
-}
+.about{display:grid;grid-template-columns:.8fr 1.2fr;gap:35px;align-items:center}
+.about-img{width:100%;height:420px;object-fit:cover;object-position:center 20%;border-radius:25px}
 .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
 .info{background:var(--card);padding:13px;border:1px solid var(--border);border-radius:12px}
 .info small{display:block;color:var(--muted);font-size:11px}
 .skills{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
-.skill{
-  padding:10px 16px;background:#1b2525;
-  color:var(--lime);border:1px solid #c6ff5e44;
-  border-radius:30px;font-size:13px;
-}
+.skill{padding:10px 16px;background:#1b2525;color:var(--lime);border:1px solid #c6ff5e44;border-radius:30px;font-size:13px}
 .project{border-color:#c6ff5e44}
 .project .btn{margin-top:15px}
 .contact-box{
-  background:linear-gradient(130deg,#202b2b,#151b24);
-  border:1px solid #c6ff5e55;
-  padding:35px;border-radius:25px;
-  display:flex;justify-content:space-between;
-  align-items:center;gap:20px;
+  background:linear-gradient(130deg,#202b2b,#151b24);border:1px solid #c6ff5e55;
+  padding:35px;border-radius:25px;display:flex;justify-content:space-between;align-items:center;gap:20px;
 }
 .reveal{opacity:0;transform:translateY(25px);transition:.7s}
 .reveal.show{opacity:1;transform:none}
-footer{
-  text-align:center;padding:30px;
-  color:var(--muted);border-top:1px solid var(--border);
-}
+footer{text-align:center;padding:30px;color:var(--muted);border-top:1px solid var(--border)}
+
 @media(max-width:760px){
-  .links{
-    display:none;position:absolute;top:70px;left:0;right:0;
-    padding:20px;background:#111820;flex-direction:column;
-  }
+  .links{display:none;position:absolute;top:70px;left:0;right:0;padding:20px;background:#111820;flex-direction:column}
   .links.open{display:flex}
   .menu{display:block}
   .hero,.about{grid-template-columns:1fr}
@@ -177,10 +133,7 @@ footer{
   .contact-box{flex-direction:column;align-items:flex-start}
 }
 @media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{
-    animation:none!important;scroll-behavior:auto!important;
-    transition:none!important
-  }
+  *,*::before,*::after{animation:none!important;scroll-behavior:auto!important;transition:none!important}
   .reveal{opacity:1;transform:none}
 }
 </style>
@@ -189,235 +142,229 @@ footer{
 <body>
 
 <nav>
- <div class="container nav">
-  <a class="logo" href="#home">ALA<span>MIN.</span></a>
-  <button class="menu" onclick="document.querySelector('.links').classList.toggle('open')">MENU</button>
-  <div class="links">
-   <a href="#home">HOME</a>
-   <a href="#about">ABOUT</a>
-   <a href="#skills">SKILLS</a>
-   <a href="#experience">EXPERIENCE</a>
-   <a href="#projects">PROJECTS</a>
-   <a href="#contact">CONTACT</a>
+  <div class="container nav">
+    <a class="logo" href="#home">ALA<span>MIN.</span></a>
+    <button class="menu" type="button" aria-label="Open navigation menu"
+      aria-expanded="false" onclick="toggleMenu(this)">MENU</button>
+    <div class="links">
+      <a href="#home">HOME</a>
+      <a href="#about">ABOUT</a>
+      <a href="#skills">SKILLS</a>
+      <a href="#experience">EXPERIENCE</a>
+      <a href="#projects">PROJECTS</a>
+      <a href="#education">EDUCATION</a>
+      <a href="#contact">CONTACT</a>
+    </div>
   </div>
- </div>
 </nav>
 
-<!-- PERSONAL ID CARD -->
+<!-- PERSONAL DIGITAL ID CARD -->
 <div class="container id-section" id="home">
- <div class="id-card reveal">
-  <div class="id-top">
-   <span class="tagline">PERSONAL DIGITAL IDENTITY</span>
-   <span class="highlight">PROFILE CARD</span>
-  </div>
-  <div class="id-content">
-   <img src="alamin.jpg" class="id-photo" alt="ALAMIN Profile Photo">
-   <div>
-    <div class="id-name">ALAMIN</div>
-    <p>SMT MATERIAL KEEPER</p>
-    <div class="id-meta">
-     <div class="meta"><small>ID</small><b>18022688</b></div>
-     <div class="meta"><small>SECTION</small><b>MK</b></div>
-     <div class="meta"><small>DEPARTMENT</small><b>SMT</b></div>
+  <div class="id-card reveal">
+    <div class="id-top">
+      <span class="tagline">PERSONAL DIGITAL IDENTITY</span>
+      <span class="highlight">PROFILE CARD</span>
     </div>
-   </div>
+    <div class="id-content">
+      <img src="alamin.jpg" class="id-photo" alt="ALAMIN profile photo">
+      <div>
+        <div class="id-name">ALAMIN</div>
+        <p>SMT MATERIAL KEEPER</p>
+        <div class="id-meta">
+          <div class="meta"><small>ID</small><b>18022688</b></div>
+          <div class="meta"><small>SECTION</small><b>MK</b></div>
+          <div class="meta"><small>DEPARTMENT</small><b>SMT</b></div>
+        </div>
+      </div>
+    </div>
   </div>
- </div>
 </div>
 
-<!-- HERO / WALKING SECTION -->
+<!-- INTRODUCTION AND WALKING VIDEO -->
 <section>
- <div class="container hero" id="hero">
-  <div class="reveal">
-   <div class="tagline">WELCOME TO MY WORLD</div>
-   <h1>Hi, I'm <span class="highlight">ALAMIN.</span></h1>
-   <p>
-    I am an SMT Material Keeper at
-    iSmartu Technology BD Limited.
-    I have 2 years of experience in SMT and materials,
-    along with digital and web development skills.
-   </p>
-   <a href="#about" class="btn primary">EXPLORE PROFILE ↘</a>
-   <a href="#projects" class="btn">MY PROJECTS</a>
-  </div>
+  <div class="container hero" id="hero">
+    <div class="reveal">
+      <div class="tagline">WELCOME TO MY WORLD</div>
+      <h1>Hi, I'm <span class="highlight">ALAMIN.</span></h1>
+      <p>
+        I am an SMT Material Keeper at iSmartu Technology BD Limited.
+        I have 2 years of experience in SMT and materials, along with
+        digital and web development skills.
+      </p>
+      <a href="#about" class="btn primary">EXPLORE PROFILE ↘</a>
+      <a href="#projects" class="btn">MY PROJECTS</a>
+    </div>
 
-  <div class="walk-box reveal">
-   <img src="walking.gif" class="walk-img" alt="ALAMIN Walking Animation">
+    <div class="walk-box reveal">
+      <video class="walk-video" autoplay muted loop playsinline preload="metadata" poster="alamin.jpg">
+        <source src="alamin-walking.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video>
+    </div>
   </div>
- </div>
 </section>
 
 <!-- ABOUT -->
 <section id="about">
- <div class="container about">
-  <img src="alamin.jpg" class="about-img reveal" alt="ALAMIN">
-  <div class="reveal">
-   <div class="tagline">ABOUT ME</div>
-   <h2>A little more about me.</h2>
-   <p>
-    Hello! I'm ALAMIN, an SMT Material Keeper at
-    iSmartu Technology BD Limited. I have 2 years of
-    experience working with SMT and materials.
-    I also have skills in basic computer operations,
-    internet use, web development, Microsoft Excel,
-    Microsoft Word and presentations.
-    I enjoy learning new tools and building useful
-    digital projects.
-   </p>
-   <div class="info-grid">
-    <div class="info"><small>FULL NAME</small><b>ALAMIN</b></div>
-    <div class="info"><small>EMPLOYMENT</small><b>Currently Working</b></div>
-    <div class="info"><small>DEPARTMENT</small><b>SMT</b></div>
-    <div class="info"><small>SECTION</small><b>MK</b></div>
-    <div class="info"><small>EXPERIENCE</small><b>2 Years</b></div>
-    <div class="info"><small>COMPANY</small><b>iSmartu Technology BD Limited</b></div>
-   </div>
+  <div class="container about">
+    <img src="alamin.jpg" class="about-img reveal" alt="ALAMIN">
+    <div class="reveal">
+      <div class="tagline">ABOUT ME</div>
+      <h2>A little more about me.</h2>
+      <p>
+        Hello! I'm ALAMIN, an SMT Material Keeper at iSmartu Technology BD Limited.
+        I have 2 years of experience working with SMT and materials. I also have
+        skills in basic computer operations, internet use, web development,
+        Microsoft Excel, Microsoft Word and presentations. I enjoy learning new
+        tools and building useful digital projects.
+      </p>
+      <div class="info-grid">
+        <div class="info"><small>FULL NAME</small><b>ALAMIN</b></div>
+        <div class="info"><small>EMPLOYMENT</small><b>Currently Working</b></div>
+        <div class="info"><small>DEPARTMENT</small><b>SMT</b></div>
+        <div class="info"><small>SECTION</small><b>MK</b></div>
+        <div class="info"><small>EXPERIENCE</small><b>2 Years</b></div>
+        <div class="info"><small>COMPANY</small><b>iSmartu Technology BD Limited</b></div>
+      </div>
+    </div>
   </div>
- </div>
 </section>
 
 <!-- SKILLS -->
 <section id="skills">
- <div class="container">
-  <div class="tagline">MY SKILLS</div>
-  <h2>What I can do.</h2>
-  <p>My professional and digital skills.</p>
-
-  <div class="skills reveal">
-   <span class="skill">Basic Computer</span>
-   <span class="skill">Internet</span>
-   <span class="skill">Web Development</span>
-   <span class="skill">Microsoft Excel</span>
-   <span class="skill">Microsoft Word</span>
-   <span class="skill">Presentations</span>
-   <span class="skill">SMT Knowledge</span>
-   <span class="skill">Materials Knowledge</span>
-   <span class="skill">SMT Material Handling</span>
-   <span class="skill">Material Record Keeping</span>
-   <span class="skill">Stock Organization</span>
-   <span class="skill">Production Material Support</span>
+  <div class="container">
+    <div class="tagline">MY SKILLS</div>
+    <h2>What I can do.</h2>
+    <p>My professional and digital skills.</p>
+    <div class="skills reveal">
+      <span class="skill">Basic Computer</span>
+      <span class="skill">Internet</span>
+      <span class="skill">Web Development</span>
+      <span class="skill">Microsoft Excel</span>
+      <span class="skill">Microsoft Word</span>
+      <span class="skill">Presentations</span>
+      <span class="skill">SMT Knowledge</span>
+      <span class="skill">Materials Knowledge</span>
+      <span class="skill">SMT Material Handling</span>
+      <span class="skill">Material Record Keeping</span>
+      <span class="skill">Stock Organization</span>
+      <span class="skill">Production Material Support</span>
+    </div>
   </div>
- </div>
 </section>
 
 <!-- EXPERIENCE -->
 <section id="experience">
- <div class="container">
-  <div class="tagline">WORK EXPERIENCE</div>
-  <h2>My professional journey.</h2>
-  <div class="card reveal">
-   <div class="number">CURRENT EMPLOYMENT · 2 YEARS</div>
-   <h3>SMT Material Keeper</h3>
-   <h3 class="highlight">iSmartu Technology BD Limited</h3>
-   <p>
-    Currently working as an SMT Material Keeper.
-    My role focuses on supporting SMT material handling
-    and organization, maintaining material and stock
-    records, checking material availability and
-    coordinating with relevant teams to support
-    production requirements.
-   </p>
+  <div class="container">
+    <div class="tagline">WORK EXPERIENCE</div>
+    <h2>My professional journey.</h2>
+    <div class="card reveal">
+      <div class="number">CURRENT EMPLOYMENT · 2 YEARS</div>
+      <h3>SMT Material Keeper</h3>
+      <h3 class="highlight">iSmartu Technology BD Limited</h3>
+      <p>
+        Currently working as an SMT Material Keeper. My role focuses on supporting
+        SMT material handling and organization, maintaining material and stock
+        records, checking material availability and coordinating with relevant
+        teams to support production requirements.
+      </p>
+    </div>
   </div>
- </div>
 </section>
 
 <!-- PROJECT -->
 <section id="projects">
- <div class="container">
-  <div class="tagline">FEATURED PROJECT</div>
-  <h2>My Creative Work.</h2>
-
-  <div class="card project reveal">
-   <div class="number">01 · E-COMMERCE WEBSITE</div>
-   <h3>গ্রামের বাড়ি (Gramer Bari)</h3>
-   <p>
-    Gramer Bari is my own e-commerce website project.
-    It is designed to showcase local products such as
-    natural honey and mustard oil.
-    This project demonstrates my interest in website
-    design, product presentation and online shopping.
-   </p>
-   <a class="btn primary"
-      href="https://abdullahalamin9656-ui.github.io/Live/"
-      target="_blank" rel="noopener noreferrer">
-      VISIT GRAMER BARI ↗
-   </a>
+  <div class="container">
+    <div class="tagline">FEATURED PROJECT</div>
+    <h2>My Creative Work.</h2>
+    <div class="card project reveal">
+      <div class="number">01 · E-COMMERCE WEBSITE</div>
+      <h3>গ্রামের বাড়ি (Gramer Bari)</h3>
+      <p>
+        Gramer Bari is my own e-commerce website project. It is designed to
+        showcase local products such as natural honey and mustard oil. This
+        project demonstrates my interest in website design, product presentation
+        and online shopping.
+      </p>
+      <a class="btn primary" href="https://abdullahalamin9656-ui.github.io/Live/"
+         target="_blank" rel="noopener noreferrer">VISIT GRAMER BARI ↗</a>
+    </div>
   </div>
- </div>
 </section>
 
 <!-- EDUCATION / KNOWLEDGE -->
 <section id="education">
- <div class="container">
-  <div class="tagline">EDUCATION & KNOWLEDGE</div>
-  <h2>My Learning Journey.</h2>
-  <div class="grid">
-   <div class="card reveal">
-    <div class="number">01</div>
-    <h3>SMT & Materials</h3>
-    <p>2 years of knowledge and experience in SMT and materials.</p>
-   </div>
-   <div class="card reveal">
-    <div class="number">02</div>
-    <h3>Computer Skills</h3>
-    <p>Basic computer operations, internet, Excel and Word.</p>
-   </div>
-   <div class="card reveal">
-    <div class="number">03</div>
-    <h3>Web Development</h3>
-    <p>Learning and creating websites using web technologies.</p>
-   </div>
+  <div class="container">
+    <div class="tagline">EDUCATION & KNOWLEDGE</div>
+    <h2>My Learning Journey.</h2>
+    <div class="grid">
+      <div class="card reveal">
+        <div class="number">01</div>
+        <h3>SMT & Materials</h3>
+        <p>2 years of knowledge and experience in SMT and materials.</p>
+      </div>
+      <div class="card reveal">
+        <div class="number">02</div>
+        <h3>Computer Skills</h3>
+        <p>Basic computer operations, internet, Excel and Word.</p>
+      </div>
+      <div class="card reveal">
+        <div class="number">03</div>
+        <h3>Web Development</h3>
+        <p>Learning and creating websites using web technologies.</p>
+      </div>
+    </div>
   </div>
- </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
- <div class="container">
-  <div class="tagline">GET IN TOUCH</div>
-  <h2>Let's connect.</h2>
-  <div class="contact-box reveal">
-   <div>
-    <h3>ALAMIN</h3>
-    <p>SMT Material Keeper | Web Development</p>
-    <p class="highlight">alaminabdullah339@gmail.com</p>
-   </div>
-   <a class="btn primary"
-      href="mailto:alaminabdullah339@gmail.com">
-      SEND EMAIL ↗
-   </a>
+  <div class="container">
+    <div class="tagline">GET IN TOUCH</div>
+    <h2>Let's connect.</h2>
+    <div class="contact-box reveal">
+      <div>
+        <h3>ALAMIN</h3>
+        <p>SMT Material Keeper | Web Development</p>
+        <p class="highlight">alaminabdullah339@gmail.com</p>
+      </div>
+      <a class="btn primary" href="mailto:alaminabdullah339@gmail.com">SEND EMAIL ↗</a>
+    </div>
   </div>
- </div>
 </section>
 
 <footer>
- <div class="container">
-  © <span id="year"></span> ALAMIN · PERSONAL PORTFOLIO
-  <br>Designed with passion.
- </div>
+  <div class="container">
+    © <span id="year"></span> ALAMIN · PERSONAL PORTFOLIO
+    <br>Designed with passion.
+  </div>
 </footer>
 
 <script>
-document.getElementById("year").textContent =
-  new Date().getFullYear();
+document.getElementById("year").textContent = new Date().getFullYear();
+
+function toggleMenu(button){
+  const links = document.querySelector(".links");
+  const isOpen = links.classList.toggle("open");
+  button.setAttribute("aria-expanded", String(isOpen));
+}
 
 const observer = new IntersectionObserver(entries => {
- entries.forEach(entry => {
-  if(entry.isIntersecting){
-   entry.target.classList.add("show");
-   observer.unobserve(entry.target);
-  }
- });
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add("show");
+      observer.unobserve(entry.target);
+    }
+  });
 },{threshold:0.12});
 
-document.querySelectorAll(".reveal").forEach(element=>{
- observer.observe(element);
-});
+document.querySelectorAll(".reveal").forEach(element => observer.observe(element));
 
-document.querySelectorAll(".links a").forEach(link=>{
- link.addEventListener("click",()=>{
-  document.querySelector(".links").classList.remove("open");
- });
+document.querySelectorAll(".links a").forEach(link => {
+  link.addEventListener("click", () => {
+    document.querySelector(".links").classList.remove("open");
+    document.querySelector(".menu").setAttribute("aria-expanded","false");
+  });
 });
 </script>
 
