@@ -4,369 +4,468 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0b0d12">
-<meta name="description" content="ALAMIN - SMT Material Keeper, Web Development and Personal Portfolio">
-<title>ALAMIN | Personal Portfolio</title>
-
+<title>WEBSEA | Discover a New World</title>
 <style>
-:root{
-  --bg:#0b0d12;
-  --card:#151b24;
-  --lime:#c6ff5e;
-  --text:#f5f7fa;
-  --muted:#a5afbd;
-  --border:rgba(255,255,255,.10);
-}
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+:root{--blue:#087cba;--deep:#031d40;--glass:rgba(255,255,255,.22)}
 body{
-  background:radial-gradient(circle at top right,#1b2b29,transparent 35%),var(--bg);
-  color:var(--text);
-  font-family:Arial,sans-serif;
-  line-height:1.7;
+ font-family:Arial,sans-serif;
+ color:#073451;
+ background:#e8f8ff;
+ overflow-x:hidden;
 }
+button{cursor:pointer;font:inherit}
 a{text-decoration:none;color:inherit}
-.container{width:min(1100px,92%);margin:auto}
-nav{
-  position:sticky;top:0;z-index:99;
-  background:rgba(11,13,18,.92);
-  backdrop-filter:blur(15px);
-  border-bottom:1px solid var(--border);
-}
-.nav{min-height:70px;display:flex;justify-content:space-between;align-items:center}
-.logo{font-size:23px;font-weight:900;letter-spacing:2px}
-.logo span{color:var(--lime)}
-.links{display:flex;gap:22px;font-size:13px}
-.links a:hover{color:var(--lime)}
-.menu{
-  display:none;background:none;color:white;
-  border:1px solid var(--border);padding:8px 13px;border-radius:8px;
-}
-section{padding:85px 0;scroll-margin-top:75px}
-.tagline{color:var(--lime);font-size:12px;letter-spacing:3px;font-weight:bold}
-h1{font-size:clamp(42px,7vw,75px);line-height:1.1}
-h2{font-size:clamp(30px,5vw,45px);margin:12px 0}
-h3{margin:8px 0;font-size:20px}
-p{color:var(--muted)}
-.highlight{color:var(--lime)}
-.btn{
-  display:inline-block;padding:12px 20px;border:1px solid var(--border);
-  border-radius:12px;font-weight:bold;font-size:13px;margin:8px 6px 0 0;
-  transition:.3s;
-}
-.btn:hover{transform:translateY(-4px)}
-.primary{background:var(--lime);color:#101510;border-color:var(--lime)}
-.id-section{padding:45px 0 20px}
-.id-card{
-  max-width:720px;margin:auto;padding:25px;
-  background:linear-gradient(130deg,#202c31,#141820);
-  border:1px solid rgba(198,255,94,.35);border-radius:25px;
-  box-shadow:0 20px 65px #0008;
-}
-.id-top{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--border);padding-bottom:15px}
-.id-content{display:flex;align-items:center;gap:22px;padding-top:20px}
-.id-photo{
-  width:125px;height:140px;object-fit:cover;object-position:center 25%;
-  border-radius:17px;border:2px solid var(--lime);
-}
-.id-name{font-size:32px;font-weight:900}
-.id-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:15px}
-.meta{background:#ffffff0c;padding:9px;border-radius:10px}
-.meta small{display:block;color:var(--muted);font-size:10px}
-.meta b{font-size:14px}
-.hero{display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center}
-.hero p{font-size:16px;margin-top:15px}
-.walk-box{
-  height:470px;display:flex;align-items:flex-end;justify-content:center;
-  overflow:hidden;background:radial-gradient(ellipse,#36483b,#18201f 65%,#121720);
-  border:1px solid var(--border);border-radius:28px;position:relative;
-}
-.walk-box:after{
-  content:"";position:absolute;bottom:0;width:80%;height:2px;
-  background:var(--lime);box-shadow:0 0 25px var(--lime);pointer-events:none;
-}
-.walk-video{
-  width:90%;height:95%;object-fit:contain;object-position:center bottom;
-  display:block;position:relative;z-index:1;
-}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
-.card{
-  padding:24px;background:linear-gradient(145deg,#1b222c,#12171e);
-  border:1px solid var(--border);border-radius:20px;transition:.3s;
-}
-.card:hover{transform:translateY(-7px);border-color:var(--lime);box-shadow:0 15px 40px #0005}
-.number{color:var(--lime);font-size:12px;letter-spacing:2px}
-.card p{font-size:14px}
-.about{display:grid;grid-template-columns:.8fr 1.2fr;gap:35px;align-items:center}
-.about-img{width:100%;height:420px;object-fit:cover;object-position:center 20%;border-radius:25px}
-.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
-.info{background:var(--card);padding:13px;border:1px solid var(--border);border-radius:12px}
-.info small{display:block;color:var(--muted);font-size:11px}
-.skills{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
-.skill{padding:10px 16px;background:#1b2525;color:var(--lime);border:1px solid #c6ff5e44;border-radius:30px;font-size:13px}
-.project{border-color:#c6ff5e44}
-.project .btn{margin-top:15px}
-.contact-box{
-  background:linear-gradient(130deg,#202b2b,#151b24);border:1px solid #c6ff5e55;
-  padding:35px;border-radius:25px;display:flex;justify-content:space-between;align-items:center;gap:20px;
-}
-.reveal{opacity:0;transform:translateY(25px);transition:.7s}
-.reveal.show{opacity:1;transform:none}
-footer{text-align:center;padding:30px;color:var(--muted);border-top:1px solid var(--border)}
 
-@media(max-width:760px){
-  .links{display:none;position:absolute;top:70px;left:0;right:0;padding:20px;background:#111820;flex-direction:column}
-  .links.open{display:flex}
-  .menu{display:block}
-  .hero,.about{grid-template-columns:1fr}
-  .walk-box{height:390px}
-  .grid{grid-template-columns:1fr 1fr}
-  .id-content{align-items:flex-start}
-  .id-photo{width:95px;height:115px}
-  .id-name{font-size:25px}
-  section{padding:60px 0}
+/* SKY */
+.sky{
+ min-height:470px;
+ position:relative;
+ overflow:hidden;
+ background:linear-gradient(180deg,#52c8f5,#b9edff 75%,#e5faff);
 }
-@media(max-width:450px){
-  .grid{grid-template-columns:1fr}
-  .id-card{padding:16px}
-  .id-meta{grid-template-columns:1fr 1fr}
-  .contact-box{flex-direction:column;align-items:flex-start}
+.sun{
+ position:absolute;
+ top:65px;left:50%;
+ transform:translateX(-50%);
+ width:145px;height:145px;
+ border-radius:50%;
+ background:radial-gradient(circle,#fff 5%,#fff7b0 35%,#ffcd43 68%,#ffad27);
+ box-shadow:0 0 40px #fff,0 0 100px #ffe77b,0 0 180px #ffd65b;
+ animation:glow 4s infinite alternate;
 }
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation:none!important;scroll-behavior:auto!important;transition:none!important}
-  .reveal{opacity:1;transform:none}
+@keyframes glow{
+ from{box-shadow:0 0 40px #fff,0 0 100px #ffe77b}
+ to{box-shadow:0 0 65px white,0 0 170px #ffe77b}
+}
+.cloud{
+ position:absolute;
+ width:130px;height:35px;
+ background:rgba(255,255,255,.8);
+ border-radius:50px;
+ filter:blur(1px);
+ animation:cloud 24s linear infinite;
+}
+.cloud:before,.cloud:after{
+ content:"";position:absolute;
+ background:inherit;border-radius:50%;
+ width:55px;height:55px;top:-25px;left:20px;
+}
+.cloud:after{left:65px;width:40px;height:40px;top:-15px}
+.cloud.one{top:170px;left:-150px}
+.cloud.two{top:280px;left:-150px;animation-delay:-12s}
+@keyframes cloud{to{transform:translateX(calc(100vw + 300px))}}
+.bird{
+ position:absolute;font-size:27px;
+ animation:fly 15s linear infinite;
+}
+.bird.one{top:90px;left:-60px}
+.bird.two{top:190px;left:-100px;animation-delay:-6s}
+.bird.three{top:120px;left:-80px;animation-delay:-10s}
+@keyframes fly{
+ 0%{transform:translateX(0) translateY(0) rotate(-5deg)}
+ 50%{transform:translateX(55vw) translateY(-35px) rotate(5deg)}
+ 100%{transform:translateX(110vw) translateY(0)}
+}
+
+/* NAVIGATION */
+.nav{
+ position:sticky;top:10px;z-index:20;
+ margin:12px auto;width:94%;max-width:1200px;
+ padding:15px 22px;border-radius:22px;
+ background:rgba(255,255,255,.38);
+ border:1px solid rgba(255,255,255,.7);
+ backdrop-filter:blur(22px);
+ display:flex;align-items:center;justify-content:space-between;
+ box-shadow:0 8px 30px #147da52b;
+}
+.logo{font-size:27px;font-weight:900;color:#087eb7;letter-spacing:2px}
+.navlinks{display:flex;gap:24px;font-weight:600;font-size:14px}
+.navlinks a:hover{color:#008dcf}
+.cart-btn{
+ border:0;background:#087fbd;color:white;
+ padding:11px 17px;border-radius:30px;font-weight:bold;
+}
+.hero-content{
+ position:relative;z-index:2;text-align:center;
+ padding:80px 15px 100px;
+}
+.hero-content h1{
+ font-size:clamp(42px,8vw,82px);
+ color:#07547e;
+ text-shadow:0 4px 20px #ffffff;
+}
+.hero-content p{margin:16px;font-size:17px;color:#17678a}
+.primary{
+ display:inline-block;padding:15px 30px;
+ border:0;border-radius:40px;
+ color:white;background:linear-gradient(120deg,#087cba,#26c9dc);
+ box-shadow:0 10px 25px #0787b55c;
+ font-weight:bold;
+}
+
+/* SECTION */
+.section{padding:65px 5%;max-width:1400px;margin:auto}
+.section-title{text-align:center;margin-bottom:35px}
+.section-title h2{font-size:32px;color:#07547e}
+.section-title p{margin-top:9px;color:#5a8498}
+
+/* CATEGORIES */
+.categories{
+ display:flex;justify-content:center;flex-wrap:wrap;gap:13px;
+ margin-bottom:35px;
+}
+.cat{
+ border:1px solid #ffffffa8;
+ background:#ffffff80;
+ backdrop-filter:blur(15px);
+ padding:12px 22px;border-radius:30px;
+ color:#07547e;font-weight:bold;
+}
+.cat.active,.cat:hover{background:#087fbd;color:white}
+
+/* GLASS CARDS */
+.products{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ gap:22px;
+}
+.card{
+ border-radius:25px;
+ padding:15px;
+ background:linear-gradient(135deg,rgba(255,255,255,.78),rgba(255,255,255,.28));
+ border:1px solid white;
+ backdrop-filter:blur(20px);
+ box-shadow:0 12px 35px #167ba526;
+ transition:.35s;
+ position:relative;
+ overflow:hidden;
+}
+.card:hover{
+ transform:translateY(-9px) scale(1.015);
+ box-shadow:0 20px 45px #078bc34d;
+}
+.product-img{
+ width:100%;height:190px;
+ border-radius:17px;
+ display:flex;align-items:center;justify-content:center;
+ font-size:90px;
+ background:linear-gradient(145deg,#d9f6ff,#a8e6f8);
+}
+.card h3{margin:15px 0 8px;color:#07547e}
+.price{font-size:20px;font-weight:bold;color:#0788bc}
+.old-price{font-size:13px;color:#8b9eaa;text-decoration:line-through;margin-left:8px}
+.rating{color:#e9a900;margin:9px 0}
+.actions{display:flex;gap:8px;margin-top:13px}
+.actions button{
+ flex:1;padding:11px 5px;border-radius:12px;
+ border:0;font-weight:bold;font-size:13px;
+}
+.add{background:#d8f5ff;color:#0879ae}
+.buy{background:#0787bd;color:white}
+.actions button:hover{filter:brightness(.94)}
+
+/* PROMO */
+.promo{
+ margin:30px 5%;padding:45px 20px;
+ text-align:center;border-radius:28px;
+ color:white;background:linear-gradient(120deg,#057ab2,#0bc4d2);
+ box-shadow:0 15px 35px #0788bb35;
+}
+.promo h2{font-size:32px;margin-bottom:12px}
+
+/* OCEAN */
+.ocean{
+ position:relative;min-height:520px;
+ overflow:hidden;color:white;
+ background:linear-gradient(180deg,#48bce1 0%,#087cae 22%,#03476f 58%,#011b3c 100%);
+}
+.ocean:before{
+ content:"";position:absolute;top:-35px;left:-10%;
+ width:120%;height:80px;
+ background:rgba(255,255,255,.38);
+ border-radius:50%;
+ animation:wave 6s ease-in-out infinite alternate;
+}
+@keyframes wave{to{transform:translateY(18px) rotate(2deg)}}
+.ocean-light{
+ position:absolute;top:0;left:25%;width:50%;height:100%;
+ background:linear-gradient(180deg,#ffffff38,transparent);
+ clip-path:polygon(40% 0,60% 0,100% 100%,0 100%);
+ opacity:.5;
+}
+.fish{
+ position:absolute;font-size:34px;
+ animation:swim 13s linear infinite;
+}
+.fish:nth-child(2){top:180px;left:-70px}
+.fish:nth-child(3){top:290px;left:-70px;animation-delay:-5s}
+.fish:nth-child(4){top:390px;left:-70px;animation-delay:-9s}
+@keyframes swim{
+ from{transform:translateX(-100px) scaleX(1)}
+ 49%{transform:translateX(55vw) scaleX(1)}
+ 50%{transform:translateX(55vw) scaleX(-1)}
+ to{transform:translateX(-100px) scaleX(-1)}
+}
+.bubble{
+ position:absolute;bottom:-30px;
+ width:12px;height:12px;border:1px solid #ffffffa8;
+ border-radius:50%;
+ animation:rise 9s linear infinite;
+}
+@keyframes rise{to{transform:translateY(-600px);opacity:0}}
+.coral{position:absolute;bottom:0;font-size:65px}
+.ocean-content{
+ position:relative;z-index:2;text-align:center;
+ padding:130px 15px 60px;
+}
+.ocean-content h2{font-size:35px}
+.footer-links{
+ display:flex;justify-content:center;gap:25px;
+ flex-wrap:wrap;margin:30px 0;
+}
+.copyright{padding:20px;border-top:1px solid #ffffff35;font-size:13px}
+
+/* CART */
+.cart-panel{
+ position:fixed;right:-400px;top:0;width:min(370px,90%);
+ height:100vh;z-index:50;background:#f4fbff;
+ padding:25px;box-shadow:-10px 0 35px #0002;
+ transition:.35s;overflow:auto;
+}
+.cart-panel.open{right:0}
+.cart-head{display:flex;justify-content:space-between;margin-bottom:25px}
+.close{border:0;background:#d8f2ff;border-radius:50%;width:35px;height:35px}
+.cart-item{padding:13px 0;border-bottom:1px solid #ddd}
+.cart-total{margin-top:20px;font-size:20px;font-weight:bold}
+.checkout{
+ width:100%;margin-top:20px;padding:15px;border:0;
+ border-radius:12px;background:#0787bd;color:white;font-weight:bold;
+}
+.overlay{
+ position:fixed;inset:0;background:#001b334c;
+ z-index:40;display:none;
+}
+.overlay.show{display:block}
+.empty{text-align:center;padding:35px 0;color:#6d8795}
+@media(max-width:650px){
+ .nav{padding:12px 15px}
+ .navlinks{display:none}
+ .logo{font-size:23px}
+ .sky{min-height:440px}
+ .hero-content{padding:85px 12px}
+ .section{padding:45px 4%}
+ .products{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+ .card{padding:10px;border-radius:19px}
+ .product-img{height:135px;font-size:65px}
+ .card h3{font-size:14px}
+ .actions{flex-direction:column}
+ .actions button{padding:10px}
+ .section-title h2{font-size:26px}
+ .promo h2{font-size:25px}
 }
 </style>
 </head>
-
 <body>
 
-<nav>
-  <div class="container nav">
-    <a class="logo" href="#home">ALA<span>MIN.</span></a>
-    <button class="menu" type="button" aria-label="Open navigation menu"
-      aria-expanded="false" onclick="toggleMenu(this)">MENU</button>
-    <div class="links">
-      <a href="#home">HOME</a>
-      <a href="#about">ABOUT</a>
-      <a href="#skills">SKILLS</a>
-      <a href="#experience">EXPERIENCE</a>
-      <a href="#projects">PROJECTS</a>
-      <a href="#education">EDUCATION</a>
-      <a href="#contact">CONTACT</a>
-    </div>
-  </div>
-</nav>
+<!-- SKY -->
+<header class="sky">
+ <div class="sun"></div>
+ <div class="cloud one"></div>
+ <div class="cloud two"></div>
+ <div class="bird one">🕊️</div>
+ <div class="bird two">🕊️</div>
+ <div class="bird three">🐦</div>
 
-<!-- PERSONAL DIGITAL ID CARD -->
-<div class="container id-section" id="home">
-  <div class="id-card reveal">
-    <div class="id-top">
-      <span class="tagline">PERSONAL DIGITAL IDENTITY</span>
-      <span class="highlight">PROFILE CARD</span>
-    </div>
-    <div class="id-content">
-      <img src="alamin.jpg" class="id-photo" alt="ALAMIN profile photo">
-      <div>
-        <div class="id-name">ALAMIN</div>
-        <p>SMT MATERIAL KEEPER</p>
-        <div class="id-meta">
-          <div class="meta"><small>ID</small><b>18022688</b></div>
-          <div class="meta"><small>SECTION</small><b>MK</b></div>
-          <div class="meta"><small>DEPARTMENT</small><b>SMT</b></div>
-        </div>
-      </div>
-    </div>
+ <nav class="nav">
+  <a href="#" class="logo">WEBSEA<span style="color:#13b9cf">.</span></a>
+  <div class="navlinks">
+   <a href="#">Home</a>
+   <a href="#products">Shop</a>
+   <a href="#categories">Categories</a>
+   <a href="#footer">Contact</a>
   </div>
-</div>
+  <button class="cart-btn" onclick="openCart()">🛒 Cart (<span id="count">0</span>)</button>
+ </nav>
 
-<!-- INTRODUCTION AND WALKING VIDEO -->
-<section>
-  <div class="container hero" id="hero">
-    <div class="reveal">
-      <div class="tagline">WELCOME TO MY WORLD</div>
-      <h1>Hi, I'm <span class="highlight">ALAMIN.</span></h1>
-      <p>
-        I am an SMT Material Keeper at iSmartu Technology BD Limited.
-        I have 2 years of experience in SMT and materials, along with
-        digital and web development skills.
-      </p>
-      <a href="#about" class="btn primary">EXPLORE PROFILE ↘</a>
-      <a href="#projects" class="btn">MY PROJECTS</a>
-    </div>
+ <div class="hero-content">
+  <h1>WELCOME TO WEBSEA</h1>
+  <p>Discover a New World of Shopping</p>
+  <a class="primary" href="#products">EXPLORE PRODUCTS ↓</a>
+ </div>
+</header>
 
-    <div class="walk-box reveal">
-      <video class="walk-video" autoplay muted loop playsinline preload="metadata" poster="alamin.jpg">
-        <source src="alamin-walking.mp4" type="video/mp4">
-        Your browser does not support HTML5 video.
-      </video>
-    </div>
-  </div>
+<!-- CATEGORIES -->
+<section class="section" id="categories">
+ <div class="section-title">
+  <h2>Explore Our World</h2>
+  <p>Everything you love, in one beautiful place.</p>
+ </div>
+ <div class="categories">
+  <button class="cat active" onclick="filterProducts('All',this)">All Products</button>
+  <button class="cat" onclick="filterProducts('Fashion',this)">Fashion</button>
+  <button class="cat" onclick="filterProducts('Electronics',this)">Electronics</button>
+  <button class="cat" onclick="filterProducts('Home',this)">Home</button>
+  <button class="cat" onclick="filterProducts('Beauty',this)">Beauty</button>
+ </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="container about">
-    <img src="alamin.jpg" class="about-img reveal" alt="ALAMIN">
-    <div class="reveal">
-      <div class="tagline">ABOUT ME</div>
-      <h2>A little more about me.</h2>
-      <p>
-        Hello! I'm ALAMIN, an SMT Material Keeper at iSmartu Technology BD Limited.
-        I have 2 years of experience working with SMT and materials. I also have
-        skills in basic computer operations, internet use, web development,
-        Microsoft Excel, Microsoft Word and presentations. I enjoy learning new
-        tools and building useful digital projects.
-      </p>
-      <div class="info-grid">
-        <div class="info"><small>FULL NAME</small><b>ALAMIN</b></div>
-        <div class="info"><small>EMPLOYMENT</small><b>Currently Working</b></div>
-        <div class="info"><small>DEPARTMENT</small><b>SMT</b></div>
-        <div class="info"><small>SECTION</small><b>MK</b></div>
-        <div class="info"><small>EXPERIENCE</small><b>2 Years</b></div>
-        <div class="info"><small>COMPANY</small><b>iSmartu Technology BD Limited</b></div>
-      </div>
-    </div>
-  </div>
+<!-- PRODUCTS -->
+<section class="section" id="products" style="padding-top:0">
+ <div class="section-title">
+  <h2>Discover Products</h2>
+  <p>Find something wonderful today.</p>
+ </div>
+ <div style="max-width:450px;margin:0 auto 28px">
+  <input id="search" type="search" placeholder="🔍 Search products..."
+   style="width:100%;padding:15px 20px;border-radius:30px;border:1px solid #b8e8f7;outline:none;background:#ffffffc9"
+   oninput="searchProducts()">
+ </div>
+ <div class="products" id="productList"></div>
 </section>
 
-<!-- SKILLS -->
-<section id="skills">
-  <div class="container">
-    <div class="tagline">MY SKILLS</div>
-    <h2>What I can do.</h2>
-    <p>My professional and digital skills.</p>
-    <div class="skills reveal">
-      <span class="skill">Basic Computer</span>
-      <span class="skill">Internet</span>
-      <span class="skill">Web Development</span>
-      <span class="skill">Microsoft Excel</span>
-      <span class="skill">Microsoft Word</span>
-      <span class="skill">Presentations</span>
-      <span class="skill">SMT Knowledge</span>
-      <span class="skill">Materials Knowledge</span>
-      <span class="skill">SMT Material Handling</span>
-      <span class="skill">Material Record Keeping</span>
-      <span class="skill">Stock Organization</span>
-      <span class="skill">Production Material Support</span>
-    </div>
-  </div>
+<section class="promo">
+ <h2>Something Beautiful Awaits!</h2>
+ <p>Explore amazing products and enjoy your shopping journey.</p>
+ <br>
+ <a href="#products" class="primary" style="background:white;color:#087eae">SHOP NOW</a>
 </section>
 
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="container">
-    <div class="tagline">WORK EXPERIENCE</div>
-    <h2>My professional journey.</h2>
-    <div class="card reveal">
-      <div class="number">CURRENT EMPLOYMENT · 2 YEARS</div>
-      <h3>SMT Material Keeper</h3>
-      <h3 class="highlight">iSmartu Technology BD Limited</h3>
-      <p>
-        Currently working as an SMT Material Keeper. My role focuses on supporting
-        SMT material handling and organization, maintaining material and stock
-        records, checking material availability and coordinating with relevant
-        teams to support production requirements.
-      </p>
-    </div>
+<!-- OCEAN FOOTER -->
+<footer class="ocean" id="footer">
+ <div class="ocean-light"></div>
+ <div class="fish">🐠</div>
+ <div class="fish">🐟</div>
+ <div class="fish">🐡</div>
+ <div class="bubble" style="left:12%"></div>
+ <div class="bubble" style="left:32%;animation-delay:2s"></div>
+ <div class="bubble" style="left:65%;animation-delay:4s"></div>
+ <div class="bubble" style="left:85%;animation-delay:1s"></div>
+ <div class="coral" style="left:5%">🪸</div>
+ <div class="coral" style="right:5%">🪸</div>
+ <div class="ocean-content">
+  <h2>WELCOME TO OUR DEEP OCEAN</h2>
+  <p style="margin-top:15px">Your shopping adventure never ends.</p>
+  <div class="footer-links">
+   <a href="#">About Us</a>
+   <a href="#">Contact</a>
+   <a href="#">Privacy Policy</a>
+   <a href="#">Terms & Conditions</a>
   </div>
-</section>
-
-<!-- PROJECT -->
-<section id="projects">
-  <div class="container">
-    <div class="tagline">FEATURED PROJECT</div>
-    <h2>My Creative Work.</h2>
-    <div class="card project reveal">
-      <div class="number">01 · E-COMMERCE WEBSITE</div>
-      <h3>গ্রামের বাড়ি (Gramer Bari)</h3>
-      <p>
-        Gramer Bari is my own e-commerce website project. It is designed to
-        showcase local products such as natural honey and mustard oil. This
-        project demonstrates my interest in website design, product presentation
-        and online shopping.
-      </p>
-      <a class="btn primary" href="https://abdullahalamin9656-ui.github.io/Live/"
-         target="_blank" rel="noopener noreferrer">VISIT GRAMER BARI ↗</a>
-    </div>
-  </div>
-</section>
-
-<!-- EDUCATION / KNOWLEDGE -->
-<section id="education">
-  <div class="container">
-    <div class="tagline">EDUCATION & KNOWLEDGE</div>
-    <h2>My Learning Journey.</h2>
-    <div class="grid">
-      <div class="card reveal">
-        <div class="number">01</div>
-        <h3>SMT & Materials</h3>
-        <p>2 years of knowledge and experience in SMT and materials.</p>
-      </div>
-      <div class="card reveal">
-        <div class="number">02</div>
-        <h3>Computer Skills</h3>
-        <p>Basic computer operations, internet, Excel and Word.</p>
-      </div>
-      <div class="card reveal">
-        <div class="number">03</div>
-        <h3>Web Development</h3>
-        <p>Learning and creating websites using web technologies.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="container">
-    <div class="tagline">GET IN TOUCH</div>
-    <h2>Let's connect.</h2>
-    <div class="contact-box reveal">
-      <div>
-        <h3>ALAMIN</h3>
-        <p>SMT Material Keeper | Web Development</p>
-        <p class="highlight">alaminabdullah339@gmail.com</p>
-      </div>
-      <a class="btn primary" href="mailto:alaminabdullah339@gmail.com">SEND EMAIL ↗</a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="container">
-    © <span id="year"></span> ALAMIN · PERSONAL PORTFOLIO
-    <br>Designed with passion.
-  </div>
+  <div class="copyright">© 2026 WEBSEA. All Rights Reserved.</div>
+ </div>
 </footer>
 
+<!-- CART -->
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+<aside class="cart-panel" id="cartPanel">
+ <div class="cart-head">
+  <h2>My Shopping Cart</h2>
+  <button class="close" onclick="closeCart()">✕</button>
+ </div>
+ <div id="cartItems"></div>
+ <div class="cart-total">Total: ৳<span id="total">0</span></div>
+ <button class="checkout" onclick="checkout()">PROCEED TO CHECKOUT</button>
+</aside>
+
 <script>
-document.getElementById("year").textContent = new Date().getFullYear();
+const products=[
+ {id:1,name:"Premium Watch",price:1250,old:1600,category:"Fashion",emoji:"⌚"},
+ {id:2,name:"Wireless Headphones",price:1850,old:2200,category:"Electronics",emoji:"🎧"},
+ {id:3,name:"Stylish Shoes",price:2200,old:2700,category:"Fashion",emoji:"👟"},
+ {id:4,name:"Smart Phone",price:12500,old:14000,category:"Electronics",emoji:"📱"},
+ {id:5,name:"Home Decor",price:850,old:1100,category:"Home",emoji:"🏺"},
+ {id:6,name:"Beauty Kit",price:950,old:1200,category:"Beauty",emoji:"💄"},
+ {id:7,name:"Travel Bag",price:1450,old:1800,category:"Fashion",emoji:"🎒"},
+ {id:8,name:"Smart Speaker",price:1950,old:2400,category:"Electronics",emoji:"🔊"}
+];
+let cart=JSON.parse(localStorage.getItem("websea_cart")||"[]");
+let activeCategory="All";
 
-function toggleMenu(button){
-  const links = document.querySelector(".links");
-  const isOpen = links.classList.toggle("open");
-  button.setAttribute("aria-expanded", String(isOpen));
+function renderProducts(list=products){
+ const box=document.getElementById("productList");
+ box.innerHTML=list.length?list.map(p=>`
+ <article class="card">
+  <div class="product-img">${p.emoji}</div>
+  <h3>${p.name}</h3>
+  <div class="price">৳${p.price.toLocaleString("en-BD")}
+   <span class="old-price">৳${p.old.toLocaleString("en-BD")}</span>
+  </div>
+  <div class="rating">★★★★★ <span style="color:#718d9c;font-size:12px">(New)</span></div>
+  <div class="actions">
+   <button class="add" onclick="addToCart(${p.id})">ADD TO CART</button>
+   <button class="buy" onclick="buyNow(${p.id})">BUY NOW</button>
+  </div>
+ </article>`).join(""):"<p>No products found.</p>";
 }
-
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add("show");
-      observer.unobserve(entry.target);
-    }
-  });
-},{threshold:0.12});
-
-document.querySelectorAll(".reveal").forEach(element => observer.observe(element));
-
-document.querySelectorAll(".links a").forEach(link => {
-  link.addEventListener("click", () => {
-    document.querySelector(".links").classList.remove("open");
-    document.querySelector(".menu").setAttribute("aria-expanded","false");
-  });
-});
+function filterProducts(category,button){
+ activeCategory=category;
+ document.querySelectorAll(".cat").forEach(b=>b.classList.remove("active"));
+ button.classList.add("active");
+ searchProducts();
+}
+function searchProducts(){
+ const q=document.getElementById("search").value.toLowerCase();
+ renderProducts(products.filter(p=>
+ (activeCategory==="All"||p.category===activeCategory)&&
+ p.name.toLowerCase().includes(q)
+ ));
+}
+function saveCart(){
+ localStorage.setItem("websea_cart",JSON.stringify(cart));
+ renderCart();
+}
+function addToCart(id){
+ const p=products.find(x=>x.id===id);
+ const found=cart.find(x=>x.id===id);
+ if(found)found.qty++;
+ else cart.push({...p,qty:1});
+ saveCart();
+ alert(p.name+" added to cart!");
+}
+function buyNow(id){
+ addToCart(id);
+ openCart();
+}
+function renderCart(){
+ document.getElementById("count").textContent=cart.reduce((s,p)=>s+p.qty,0);
+ document.getElementById("cartItems").innerHTML=cart.length?
+ cart.map(p=>`
+ <div class="cart-item">
+ <b>${p.emoji} ${p.name}</b>
+ <p>৳${p.price} × ${p.qty}</p>
+ <button onclick="changeQty(${p.id},-1)">−</button>
+ <button onclick="changeQty(${p.id},1)">+</button>
+ <button onclick="removeItem(${p.id})">Remove</button>
+ </div>`).join(""):'<div class="empty">Your cart is empty 🛒</div>';
+ document.getElementById("total").textContent=
+ cart.reduce((s,p)=>s+p.price*p.qty,0).toLocaleString("en-BD");
+}
+function changeQty(id,n){
+ const p=cart.find(x=>x.id===id);
+ if(!p)return;
+ p.qty+=n;
+ if(p.qty<=0)cart=cart.filter(x=>x.id!==id);
+ saveCart();
+}
+function removeItem(id){
+ cart=cart.filter(x=>x.id!==id);
+ saveCart();
+}
+function openCart(){
+ document.getElementById("cartPanel").classList.add("open");
+ document.getElementById("overlay").classList.add("show");
+}
+function closeCart(){
+ document.getElementById("cartPanel").classList.remove("open");
+ document.getElementById("overlay").classList.remove("show");
+}
+function checkout(){
+ if(!cart.length){alert("Your cart is empty!");return}
+ alert("Your cart is ready. Checkout form and order processing will be connected in the next development stage.");
+}
+renderProducts();
+renderCart();
 </script>
-
 </body>
 </html>
