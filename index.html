@@ -4,599 +4,787 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#83d9ee">
-<title>WEBSEA | Discover a New World</title>
+<meta name="theme-color" content="#73d9ed">
+<title>WEBSEA — A New World of Shopping</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-:root {
-  --blue:#087ca8;
-  --deep:#032c49;
-  --glass:rgba(255,255,255,.22);
-  --border:rgba(255,255,255,.55);
-  --text:#123b55;
-}
-
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  font-family:Inter,Arial,sans-serif;
-  color:var(--text);
-  overflow-x:hidden;
-  background:#8fe1f3;
+ font-family:Inter,Arial,sans-serif;
+ color:#073b59;
+ background:#79d9ed;
+ overflow-x:hidden;
 }
-button,input{font:inherit}
+button,input,textarea{font:inherit}
 button{cursor:pointer}
 
-/* SKY WORLD */
-.sky{
-  min-height:650px;
-  position:relative;
-  overflow:hidden;
-  padding-bottom:75px;
-  background:
-    radial-gradient(ellipse at 50% 0%,#fff 0%,transparent 32%),
-    linear-gradient(180deg,#7bd5f2 0%,#b8edfa 48%,#e4faff 100%);
-}
-.sun{
-  position:absolute;
-  top:75px;
-  right:13%;
-  width:145px;
-  height:145px;
-  border-radius:50%;
-  background:radial-gradient(circle,#fff 0%,#fffbd1 35%,#ffd96b 70%,#ffbd42 100%);
-  box-shadow:0 0 35px 15px #fff9b5,0 0 100px 45px #ffe68b,0 0 180px 75px #fff2a0;
-  animation:sunGlow 5s infinite alternate;
-}
-@keyframes sunGlow{
-  from{transform:scale(.96);filter:brightness(1)}
-  to{transform:scale(1.06);filter:brightness(1.15)}
-}
-.sun-rays{
-  position:absolute;
-  top:40px;right:calc(13% - 35px);
-  width:215px;height:215px;
-  border-radius:50%;
-  background:repeating-conic-gradient(from 0deg,transparent 0deg 12deg,rgba(255,245,173,.25) 13deg 16deg,transparent 17deg 25deg);
-  animation:rotate 50s linear infinite;
-}
-@keyframes rotate{to{transform:rotate(360deg)}}
-
-.cloud{
-  position:absolute;
-  width:150px;height:43px;
-  background:rgba(255,255,255,.83);
-  border-radius:50px;
-  filter:drop-shadow(0 8px 10px rgba(40,140,170,.08));
-  animation:cloudMove 35s linear infinite;
-}
-.cloud:before,.cloud:after{
-  content:"";position:absolute;
-  background:inherit;border-radius:50%;
-}
-.cloud:before{width:65px;height:65px;left:25px;top:-30px}
-.cloud:after{width:85px;height:85px;right:18px;top:-43px}
-.c1{top:130px;left:-180px;animation-duration:45s}
-.c2{top:245px;left:-200px;transform:scale(.7);animation-duration:60s;animation-delay:-15s}
-.c3{top:70px;left:-200px;transform:scale(.55);animation-duration:70s;animation-delay:-35s}
-@keyframes cloudMove{to{left:115%}}
-
-.bird{
-  position:absolute;
-  color:#245b77;
-  font-size:24px;
-  animation:fly 18s linear infinite;
-  opacity:.75;
-}
-.b1{top:190px;left:-40px}
-.b2{top:220px;left:-80px;animation-delay:-6s;font-size:18px}
-.b3{top:155px;left:-100px;animation-delay:-12s;font-size:15px}
-@keyframes fly{
-  0%{transform:translateX(0) translateY(0) scale(.8)}
-  50%{transform:translateX(55vw) translateY(-35px) scale(1)}
-  100%{transform:translateX(115vw) translateY(10px) scale(.8)}
+:root{
+ --blue:#087da7;
+ --cyan:#00b9c7;
+ --dark:#032c49;
+ --glass:rgba(255,255,255,.19);
+ --glass-border:rgba(255,255,255,.65);
 }
 
-/* NAVIGATION */
-.nav{
-  position:sticky;top:0;z-index:100;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:15px 6%;
-  background:rgba(255,255,255,.48);
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid rgba(255,255,255,.65);
+/* 3D BACKGROUND */
+#world{
+ position:fixed;
+ inset:0;
+ width:100%;
+ height:100%;
+ z-index:-2;
+ pointer-events:none;
+}
+.world-overlay{
+ position:fixed;
+ inset:0;
+ z-index:-1;
+ pointer-events:none;
+ background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(0,65,100,.06));
+}
+
+/* NAV */
+nav{
+ position:sticky;
+ top:0;
+ z-index:50;
+ min-height:68px;
+ padding:12px 5%;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ background:rgba(225,250,255,.55);
+ border-bottom:1px solid rgba(255,255,255,.65);
+ backdrop-filter:blur(22px);
+ -webkit-backdrop-filter:blur(22px);
 }
 .logo{
-  font-size:27px;font-weight:900;letter-spacing:3px;
-  color:#075579;
+ font-size:27px;
+ font-weight:900;
+ letter-spacing:3px;
+ color:#075579;
 }
-.logo span{color:#00a9bc}
-.navlinks{display:flex;gap:27px;align-items:center}
-.navlinks a{
-  text-decoration:none;color:#164b67;font-weight:700;font-size:13px;
+.logo span{color:#00aab8}
+.nav-links{
+ display:flex;
+ align-items:center;
+ gap:25px;
 }
-.nav-actions{display:flex;gap:10px}
-.nav-btn{
-  border:1px solid rgba(255,255,255,.8);
-  background:rgba(255,255,255,.45);
-  color:#075579;border-radius:50px;
-  padding:10px 15px;font-weight:800;
+.nav-links a{
+ text-decoration:none;
+ color:#164a64;
+ font-size:11px;
+ font-weight:800;
 }
-.cart-count{
-  background:#087ca8;color:white;
-  border-radius:50px;padding:2px 7px;font-size:11px;
+.nav-links a:hover{color:#00a9bb}
+.nav-right{display:flex;gap:9px;align-items:center}
+.nav-button{
+ border:1px solid white;
+ background:rgba(255,255,255,.5);
+ color:#075579;
+ border-radius:50px;
+ padding:10px 15px;
+ font-size:11px;
+ font-weight:900;
+}
+.cart-number{
+ background:#00a8b9;
+ color:white;
+ padding:3px 7px;
+ border-radius:20px;
 }
 
 /* HERO */
 .hero{
-  position:relative;z-index:2;
-  text-align:center;
-  max-width:850px;margin:90px auto 0;padding:20px;
+ min-height:690px;
+ padding:125px 20px 130px;
+ text-align:center;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ position:relative;
 }
-.eyebrow{
-  display:inline-block;padding:9px 17px;
-  border:1px solid rgba(255,255,255,.75);
-  border-radius:50px;background:rgba(255,255,255,.25);
-  font-size:11px;letter-spacing:3px;font-weight:800;
+.hero-content{max-width:850px}
+.pill{
+ display:inline-block;
+ padding:10px 18px;
+ border:1px solid rgba(255,255,255,.8);
+ border-radius:50px;
+ background:rgba(255,255,255,.25);
+ backdrop-filter:blur(12px);
+ color:#075579;
+ font-size:10px;
+ letter-spacing:3px;
+ font-weight:900;
 }
 .hero h1{
-  margin-top:22px;
-  font-size:clamp(42px,8vw,85px);
-  line-height:1.03;font-weight:900;
-  letter-spacing:-4px;color:#075579;
-  text-shadow:0 5px 25px rgba(255,255,255,.65);
+ margin-top:25px;
+ font-size:clamp(45px,8vw,88px);
+ line-height:1.02;
+ letter-spacing:-4px;
+ font-weight:900;
+ color:#064e70;
+ text-shadow:0 8px 30px rgba(255,255,255,.65);
 }
-.hero h1 span{color:#00a4bb}
+.hero h1 span{
+ color:#00a8b9;
+}
 .hero p{
-  margin:20px auto;max-width:520px;
-  line-height:1.8;color:#285c72;font-size:14px;
+ max-width:570px;
+ margin:24px auto;
+ color:#235b74;
+ line-height:1.9;
+ font-size:15px;
 }
-.primary-btn{
-  border:0;border-radius:50px;
-  padding:15px 28px;
-  background:linear-gradient(120deg,#087ca8,#00b7bb);
-  color:white;font-weight:800;
-  box-shadow:0 12px 30px rgba(0,115,155,.25);
-  transition:.3s;
+.main-button{
+ display:inline-block;
+ padding:16px 27px;
+ border:0;
+ border-radius:50px;
+ color:white;
+ font-size:12px;
+ font-weight:900;
+ background:linear-gradient(120deg,#087da7,#00b9b8);
+ box-shadow:0 12px 30px rgba(0,100,145,.25);
+ transition:.3s;
 }
-.primary-btn:hover{transform:translateY(-4px);box-shadow:0 17px 35px #087ca855}
-.hero-note{margin-top:15px;font-size:10px;letter-spacing:2px;color:#39728a}
+.main-button:hover{transform:translateY(-4px)}
+.hero-caption{
+ margin-top:23px;
+ color:#36768c;
+ font-size:10px;
+ letter-spacing:3px;
+ font-weight:700;
+}
 
-/* WAVES */
-.wave-wrap{
-  position:absolute;bottom:-2px;left:0;width:100%;height:100px;overflow:hidden;
+/* SECTION */
+.section{
+ position:relative;
+ padding:85px 5% 100px;
+ background:linear-gradient(180deg,rgba(195,245,250,.45),rgba(224,251,255,.68));
+ backdrop-filter:blur(3px);
 }
-.wave{
-  position:absolute;bottom:0;left:-10%;width:120%;height:100px;
-  border-radius:45% 55% 0 0;
-  background:rgba(255,255,255,.45);
-  animation:wave 9s ease-in-out infinite alternate;
+.section-heading{
+ text-align:center;
+ margin-bottom:38px;
 }
-.wave:nth-child(2){
-  height:75px;opacity:.5;bottom:5px;
-  background:#8ce2ef;animation-duration:12s;
+.section-heading small{
+ color:#00a2b5;
+ letter-spacing:4px;
+ font-size:10px;
+ font-weight:900;
 }
-@keyframes wave{to{transform:translateX(5%) rotate(2deg)}}
+.section-heading h2{
+ margin:13px 0;
+ color:#064f70;
+ font-size:clamp(30px,5vw,48px);
+ font-weight:900;
+ letter-spacing:-2px;
+}
+.section-heading p{
+ color:#527b8d;
+ font-size:13px;
+ line-height:1.7;
+}
 
-/* SHOP AREA */
-.shop{
-  position:relative;
-  padding:70px 6% 100px;
-  background:linear-gradient(180deg,#b5eff7 0%,#e4fbff 25%,#d4f4f7 100%);
-}
-.section-head{text-align:center;margin-bottom:35px}
-.section-head small{
-  color:#00a0b5;font-weight:900;letter-spacing:3px;font-size:10px;
-}
-.section-head h2{
-  font-size:clamp(30px,5vw,48px);
-  color:#075579;margin:12px 0;
-  font-weight:900;letter-spacing:-2px;
-}
-.section-head p{font-size:13px;color:#47758a}
-
+/* FILTER AND SEARCH */
 .shop-tools{
-  max-width:1100px;margin:0 auto 28px;
-  display:flex;justify-content:space-between;
-  align-items:center;gap:15px;flex-wrap:wrap;
+ max-width:1180px;
+ margin:0 auto 30px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ flex-wrap:wrap;
+ gap:15px;
 }
-.search{
-  display:flex;align-items:center;gap:10px;
-  background:rgba(255,255,255,.7);
-  border:1px solid white;border-radius:50px;
-  padding:12px 18px;min-width:230px;
-  box-shadow:0 5px 20px #387b9910;
+.search-box{
+ display:flex;
+ align-items:center;
+ gap:10px;
+ width:250px;
+ max-width:100%;
+ padding:13px 17px;
+ border:1px solid white;
+ border-radius:50px;
+ background:rgba(255,255,255,.62);
+ box-shadow:0 8px 25px rgba(0,90,120,.06);
 }
-.search input{
-  border:0;outline:0;background:transparent;width:100%;
-  color:#164b67;font-size:13px;
+.search-box input{
+ width:100%;
+ border:0;
+ outline:0;
+ background:transparent;
+ color:#075579;
+ font-size:12px;
 }
-.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filters{
+ display:flex;
+ gap:8px;
+ flex-wrap:wrap;
+}
 .filter{
-  border:1px solid white;background:rgba(255,255,255,.5);
-  color:#236078;border-radius:50px;
-  padding:10px 15px;font-size:11px;font-weight:800;
+ padding:10px 15px;
+ border:1px solid rgba(255,255,255,.9);
+ border-radius:50px;
+ background:rgba(255,255,255,.5);
+ color:#28657d;
+ font-size:10px;
+ font-weight:800;
 }
 .filter.active,.filter:hover{
-  color:white;background:#087ca8;border-color:#087ca8;
+ background:#087da7;
+ color:white;
+ border-color:#087da7;
 }
 
+/* PRODUCT GRID */
 .product-grid{
-  max-width:1200px;margin:auto;
-  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:20px;
+ max-width:1200px;
+ margin:auto;
+ display:grid;
+ grid-template-columns:repeat(4,minmax(0,1fr));
+ gap:22px;
 }
 .product{
-  position:relative;overflow:hidden;
-  border:1px solid rgba(255,255,255,.9);
-  border-radius:24px;
-  background:linear-gradient(135deg,rgba(255,255,255,.68),rgba(255,255,255,.22));
-  backdrop-filter:blur(18px);
-  box-shadow:0 15px 40px rgba(27,112,145,.10),inset 0 1px 1px white;
-  transition:.35s;
+ position:relative;
+ overflow:hidden;
+ border-radius:23px;
+ border:1px solid rgba(255,255,255,.85);
+ background:linear-gradient(135deg,rgba(255,255,255,.62),rgba(255,255,255,.20));
+ backdrop-filter:blur(20px);
+ -webkit-backdrop-filter:blur(20px);
+ box-shadow:
+  0 15px 40px rgba(0,70,110,.10),
+  inset 0 1px 2px rgba(255,255,255,.9);
+ transition:transform .35s,box-shadow .35s;
 }
-.product:hover{transform:translateY(-8px);box-shadow:0 22px 45px rgba(27,112,145,.19)}
-.product-img{
-  height:190px;overflow:hidden;position:relative;
-  background:linear-gradient(135deg,#d6f5f8,#f4ffff);
+.product:hover{
+ transform:translateY(-8px);
+ box-shadow:0 25px 50px rgba(0,70,110,.18);
 }
-.product-img img{
-  width:100%;height:100%;object-fit:cover;
-  transition:transform .6s;
+.product-image{
+ position:relative;
+ height:205px;
+ overflow:hidden;
+ background:rgba(255,255,255,.35);
 }
-.product:hover .product-img img{transform:scale(1.08)}
-.tag{
-  position:absolute;top:12px;left:12px;
-  padding:7px 10px;border-radius:30px;
-  background:rgba(255,255,255,.85);
-  color:#087ca8;font-size:9px;font-weight:900;
+.product-image img{
+ width:100%;
+ height:100%;
+ object-fit:cover;
+ display:block;
+ transition:transform .6s;
+}
+.product:hover .product-image img{transform:scale(1.08)}
+.product-tag{
+ position:absolute;
+ top:12px;
+ left:12px;
+ padding:7px 11px;
+ border-radius:30px;
+ color:#087da7;
+ background:rgba(255,255,255,.9);
+ font-size:9px;
+ font-weight:900;
 }
 .product-info{padding:17px}
-.product-category{
-  font-size:9px;color:#00a1b6;font-weight:900;
-  letter-spacing:2px;text-transform:uppercase;
+.category-name{
+ color:#00a6b6;
+ font-size:10px;
+ letter-spacing:2px;
+ font-weight:900;
 }
-.product h3{font-size:15px;color:#12435b;margin:8px 0}
-.product-desc{font-size:11px;color:#668394;line-height:1.5;min-height:32px}
-.price-row{display:flex;justify-content:space-between;align-items:center;margin-top:14px}
-.price{font-size:18px;font-weight:900;color:#087ca8}
-.add-btn{
-  border:0;background:#087ca8;color:white;
-  border-radius:50px;padding:10px 13px;
-  font-size:11px;font-weight:800;
+.product-info h3{
+ margin:9px 0 7px;
+ color:#12465f;
+ font-size:16px;
+ line-height:1.4;
 }
-.add-btn:hover{background:#00a8ad}
-.no-results{
-  display:none;text-align:center;padding:40px;color:#52798b;
-  grid-column:1/-1;
+.product-description{
+ color:#648394;
+ font-size:11px;
+ line-height:1.7;
+ min-height:37px;
+}
+.product-bottom{
+ margin-top:15px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:6px;
+}
+.product-price{
+ color:#087da7;
+ font-size:17px;
+ font-weight:900;
+}
+.add-button{
+ border:0;
+ border-radius:50px;
+ background:linear-gradient(120deg,#087da7,#00aeb8);
+ color:white;
+ padding:10px 14px;
+ font-size:10px;
+ font-weight:900;
+}
+.add-button:active{transform:scale(.94)}
+.empty-message{
+ display:none;
+ grid-column:1/-1;
+ padding:35px;
+ text-align:center;
+ color:#527b8d;
 }
 
-/* PROMO */
+/* PROMOTION */
 .promo{
-  max-width:1100px;margin:70px auto 0;
-  padding:35px;border-radius:28px;
-  background:linear-gradient(120deg,#087ca8,#00aeb6);
-  color:white;display:flex;align-items:center;
-  justify-content:space-between;gap:20px;
-  box-shadow:0 20px 45px #087ca833;
+ max-width:1150px;
+ margin:75px auto 0;
+ padding:38px;
+ border:1px solid rgba(255,255,255,.35);
+ border-radius:27px;
+ background:linear-gradient(115deg,rgba(3,117,160,.95),rgba(0,178,181,.95));
+ color:white;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:20px;
+ box-shadow:0 20px 50px rgba(0,90,130,.2);
 }
-.promo h2{font-size:clamp(24px,4vw,38px);font-weight:900}
-.promo p{font-size:12px;opacity:.85;margin-top:8px}
+.promo h2{font-size:clamp(23px,4vw,36px);font-weight:900}
+.promo p{font-size:12px;margin-top:9px;opacity:.85}
 .promo button{
-  border:0;background:white;color:#087ca8;
-  border-radius:50px;padding:14px 20px;font-weight:900;
-  white-space:nowrap;
+ border:0;
+ background:white;
+ color:#087da7;
+ padding:15px 22px;
+ border-radius:50px;
+ font-weight:900;
+ white-space:nowrap;
 }
 
-/* DEEP OCEAN */
+/* OCEAN */
 .ocean{
-  min-height:500px;position:relative;overflow:hidden;
-  padding:100px 6% 65px;
-  text-align:center;color:white;
-  background:
-    radial-gradient(ellipse at 50% 0%,rgba(91,218,241,.7),transparent 42%),
-    linear-gradient(180deg,#087fa7 0%,#034b73 42%,#012b4b 100%);
+ position:relative;
+ min-height:580px;
+ overflow:hidden;
+ padding:115px 20px 90px;
+ text-align:center;
+ color:white;
+ background:
+  radial-gradient(ellipse at 50% 0%,rgba(100,228,247,.24),transparent 45%),
+  linear-gradient(180deg,rgba(2,84,125,.60),rgba(1,37,69,.93));
 }
 .ocean:before{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:repeating-linear-gradient(115deg,transparent 0 80px,rgba(110,227,255,.035) 81px 83px);
+ content:"";
+ position:absolute;
+ inset:0;
+ background:repeating-linear-gradient(110deg,transparent 0 85px,rgba(130,235,255,.04) 86px 88px);
+ pointer-events:none;
 }
-.ocean-light{
-  position:absolute;top:-130px;left:15%;width:70%;height:350px;
-  background:radial-gradient(ellipse,rgba(117,238,255,.24),transparent 70%);
-  filter:blur(12px);animation:lightMove 8s ease-in-out infinite alternate;
+.ocean-content{position:relative;z-index:2}
+.ocean h2{
+ font-size:clamp(32px,5vw,55px);
+ font-weight:900;
+ letter-spacing:-2px;
 }
-@keyframes lightMove{to{transform:translateX(60px) scale(1.2)}}
-.ocean h2{position:relative;font-size:clamp(30px,5vw,52px);font-weight:900}
-.ocean p{position:relative;margin:15px auto;max-width:500px;line-height:1.8;font-size:13px;color:#b9eafa}
-.sea-life{position:absolute;inset:0;pointer-events:none;overflow:hidden}
-.fish{
-  position:absolute;font-size:27px;
-  animation:swim 18s linear infinite;
-  filter:drop-shadow(0 5px 8px #001c3b66);
+.ocean p{
+ max-width:540px;
+ margin:20px auto;
+ color:#b9eafa;
+ font-size:14px;
+ line-height:2;
 }
-.fish.f1{top:50%;left:-60px}
-.fish.f2{top:68%;left:-80px;animation-delay:-7s;font-size:20px}
-.fish.f3{top:35%;left:-70px;animation-delay:-13s;font-size:33px}
+.ocean-label{
+ display:inline-block;
+ padding:9px 16px;
+ border:1px solid rgba(255,255,255,.3);
+ border-radius:40px;
+ color:#b7f6ff;
+ font-size:10px;
+ letter-spacing:3px;
+}
+.sea-emoji{
+ position:absolute;
+ font-size:35px;
+ opacity:.8;
+ animation:swim 19s linear infinite;
+}
+.fish-one{top:50%;left:-50px}
+.fish-two{top:70%;left:-60px;animation-delay:-7s;font-size:26px}
+.fish-three{top:34%;left:-60px;animation-delay:-13s;font-size:22px}
 @keyframes swim{
   0%{transform:translateX(0) scaleX(1)}
   49%{transform:translateX(55vw) scaleX(1)}
   50%{transform:translateX(55vw) scaleX(-1)}
   100%{transform:translateX(115vw) scaleX(-1)}
 }
-.bubble{
-  position:absolute;bottom:-30px;
-  width:9px;height:9px;border:1px solid #b5f8ff;
-  border-radius:50%;background:rgba(255,255,255,.12);
-  animation:rise 9s linear infinite;
+.sea-bubble{
+ position:absolute;
+ bottom:-25px;
+ width:10px;height:10px;
+ border:1px solid rgba(205,250,255,.7);
+ border-radius:50%;
+ background:rgba(255,255,255,.12);
+ animation:bubbleRise 10s linear infinite;
 }
-.bubble:nth-child(2){left:15%;animation-delay:2s}
-.bubble:nth-child(3){left:30%;animation-delay:5s;width:15px;height:15px}
-.bubble:nth-child(4){left:65%;animation-delay:1s}
-.bubble:nth-child(5){left:85%;animation-delay:4s;width:13px;height:13px}
-@keyframes rise{
-  to{transform:translateY(-600px) translateX(30px);opacity:0}
+.sea-bubble:nth-child(2){left:12%;animation-delay:2s}
+.sea-bubble:nth-child(3){left:29%;animation-delay:5s;width:16px;height:16px}
+.sea-bubble:nth-child(4){left:58%;animation-delay:1s}
+.sea-bubble:nth-child(5){left:82%;animation-delay:4s;width:13px;height:13px}
+@keyframes bubbleRise{
+ to{transform:translateY(-650px) translateX(35px);opacity:0}
 }
-.seaweed{
-  position:absolute;bottom:-20px;font-size:65px;
-  opacity:.5;animation:sway 4s ease-in-out infinite alternate;
-}
-.seaweed.left{left:3%}
-.seaweed.right{right:3%;animation-delay:-2s}
-@keyframes sway{to{transform:rotate(12deg)}}
 
 /* FOOTER */
 footer{
-  background:#01243d;color:#a9d6e6;
-  padding:35px 6%;text-align:center;
+ position:relative;
+ z-index:2;
+ padding:40px 20px;
+ text-align:center;
+ background:rgba(0,27,49,.97);
+ color:#a8d8e9;
 }
-.footer-logo{font-size:25px;font-weight:900;letter-spacing:3px;color:white}
-footer p{font-size:11px;margin:12px 0}
-.footer-links{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:20px}
-.footer-links a{color:#a9d6e6;text-decoration:none;font-size:11px}
+.footer-logo{
+ color:white;
+ font-size:28px;
+ font-weight:900;
+ letter-spacing:4px;
+}
+footer p{font-size:11px;margin:13px 0}
+.footer-links{
+ display:flex;
+ justify-content:center;
+ flex-wrap:wrap;
+ gap:23px;
+ margin:22px 0;
+}
+.footer-links a{
+ color:#a8d8e9;
+ text-decoration:none;
+ font-size:11px;
+}
 
-/* CART DRAWER */
+/* CART */
 .overlay{
-  position:fixed;inset:0;background:rgba(0,24,43,.48);
-  z-index:200;display:none;
+ display:none;
+ position:fixed;
+ inset:0;
+ z-index:100;
+ background:rgba(0,20,40,.55);
 }
 .overlay.show{display:block}
 .drawer{
-  position:fixed;right:-430px;top:0;height:100%;
-  width:min(410px,92vw);background:#f3fcff;
-  z-index:201;padding:25px;transition:.35s;
-  box-shadow:-10px 0 40px #001d3533;overflow-y:auto;
+ position:fixed;
+ z-index:101;
+ top:0;right:-450px;
+ width:min(420px,92vw);
+ height:100%;
+ overflow-y:auto;
+ padding:24px;
+ background:#f2fcff;
+ box-shadow:-15px 0 45px rgba(0,0,0,.2);
+ transition:right .35s;
 }
 .drawer.open{right:0}
-.drawer-head{display:flex;justify-content:space-between;align-items:center}
-.close-btn{
-  border:0;background:#dff5fa;color:#075579;
-  width:38px;height:38px;border-radius:50%;font-size:20px;
+.drawer-header{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ margin-bottom:20px;
+}
+.drawer-header h2{color:#075579}
+.close{
+ width:38px;height:38px;
+ border:0;border-radius:50%;
+ background:#dff4f8;color:#075579;
+ font-size:22px;
 }
 .cart-item{
-  display:flex;gap:12px;padding:15px 0;
-  border-bottom:1px solid #dceef2;align-items:center;
+ display:flex;
+ gap:12px;
+ align-items:center;
+ padding:14px 0;
+ border-bottom:1px solid #d8edf2;
 }
-.cart-item img{width:65px;height:65px;object-fit:cover;border-radius:12px}
-.cart-item-info{flex:1}
-.cart-item-info b{font-size:13px}
-.cart-item-info p{font-size:12px;color:#087ca8;margin-top:5px}
-.qty{display:flex;gap:8px;align-items:center;margin-top:7px}
-.qty button{border:0;background:#d9f2f7;border-radius:6px;padding:4px 9px;color:#075579}
-.remove{border:0;background:none;color:#d34b4b;font-size:11px}
+.cart-item img{
+ width:65px;height:65px;
+ object-fit:cover;
+ border-radius:12px;
+}
+.cart-item-details{flex:1}
+.cart-item-details strong{font-size:12px}
+.cart-item-details p{font-size:12px;color:#087da7;margin-top:5px}
+.quantity{display:flex;align-items:center;gap:9px;margin-top:7px}
+.quantity button{
+ border:0;border-radius:7px;
+ background:#dff4f8;color:#075579;
+ padding:4px 9px;
+}
+.remove-item{
+ border:0;background:none;
+ color:#d34b4b;font-size:10px;
+}
 .cart-total{
-  display:flex;justify-content:space-between;
-  padding:22px 0;font-weight:900;font-size:18px;
+ display:flex;
+ justify-content:space-between;
+ padding:22px 0;
+ color:#075579;
+ font-size:18px;
+ font-weight:900;
 }
-.checkout-btn{
-  width:100%;border:0;border-radius:50px;
-  padding:15px;background:#087ca8;color:white;font-weight:900;
+.checkout-button{
+ width:100%;
+ padding:15px;
+ border:0;
+ border-radius:50px;
+ background:linear-gradient(120deg,#087da7,#00aeb8);
+ color:white;
+ font-weight:900;
 }
 
-/* CHECKOUT MODAL */
+/* CHECKOUT */
 .modal{
-  display:none;position:fixed;inset:0;z-index:300;
-  background:rgba(0,20,38,.65);
-  align-items:center;justify-content:center;padding:15px;
+ display:none;
+ position:fixed;
+ inset:0;
+ z-index:120;
+ padding:15px;
+ align-items:center;
+ justify-content:center;
+ background:rgba(0,20,40,.7);
 }
 .modal.show{display:flex}
-.modal-box{
-  background:#f5fcff;width:100%;max-width:440px;
-  padding:25px;border-radius:22px;max-height:90vh;overflow:auto;
+.modal-content{
+ width:100%;
+ max-width:430px;
+ max-height:90vh;
+ overflow:auto;
+ padding:25px;
+ border-radius:22px;
+ background:#f2fcff;
 }
-.modal-box h2{color:#075579;margin-bottom:8px}
-.modal-box p{font-size:12px;color:#638394;margin-bottom:18px}
-.modal-box input,.modal-box textarea{
-  width:100%;padding:13px;margin:7px 0;
-  border:1px solid #cde6ed;border-radius:10px;
-  outline:none;background:white;font-size:13px;
+.modal-content h2{color:#075579;margin-bottom:8px}
+.modal-content p{font-size:12px;color:#638394;margin-bottom:15px}
+.modal-content input,.modal-content textarea{
+ width:100%;
+ padding:13px;
+ margin:7px 0;
+ border:1px solid #cde6ed;
+ border-radius:10px;
+ outline:none;
+ background:white;
+ font-size:13px;
 }
-.modal-box textarea{height:85px;resize:vertical}
+.modal-content textarea{height:85px;resize:vertical}
 .modal-actions{display:flex;gap:10px;margin-top:12px}
-.modal-actions button{flex:1;padding:13px;border-radius:50px;border:0;font-weight:800}
+.modal-actions button{
+ flex:1;padding:13px;border:0;border-radius:50px;
+ font-size:12px;font-weight:900;
+}
 .cancel{background:#dceef3;color:#075579}
-.confirm{background:#087ca8;color:white}
-.demo-warning{
-  background:#fff3d9;color:#805a17;
-  border-radius:10px;padding:10px;font-size:10px;margin-top:12px;
+.confirm{background:#087da7;color:white}
+.notice{
+ margin-top:12px;
+ padding:11px;
+ border-radius:10px;
+ background:#fff1d4;
+ color:#765515;
+ font-size:10px;
+ line-height:1.6;
 }
 
-/* RESPONSIVE */
+/* MOBILE */
 @media(max-width:900px){
-  .product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .navlinks{gap:14px}
+ .product-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+ .nav-links{gap:13px}
 }
 @media(max-width:650px){
-  .nav{padding:12px 4%}
-  .logo{font-size:22px}
-  .navlinks{display:none}
-  .nav-btn{padding:9px 12px;font-size:11px}
-  .sun{width:100px;height:100px;top:90px;right:10%}
-  .sun-rays{width:160px;height:160px;top:60px;right:calc(10% - 30px)}
-  .hero{margin-top:90px}
-  .hero h1{letter-spacing:-2px}
-  .shop{padding:55px 4% 75px}
-  .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-  .product{border-radius:17px}
-  .product-img{height:145px}
-  .product-info{padding:12px}
-  .product h3{font-size:13px}
-  .product-desc{font-size:10px}
-  .price{font-size:15px}
-  .add-btn{padding:9px 10px;font-size:10px}
-  .shop-tools{align-items:stretch}
-  .search{width:100%}
-  .filters{justify-content:center}
-  .filter{padding:9px 11px;font-size:10px}
-  .promo{padding:25px;flex-direction:column;text-align:center}
-  .ocean{min-height:430px;padding-top:85px}
+ nav{min-height:60px;padding:10px 4%}
+ .logo{font-size:22px;letter-spacing:2px}
+ .nav-links{display:none}
+ .nav-button{padding:9px 12px;font-size:10px}
+ .hero{min-height:660px;padding:110px 20px 100px}
+ .hero h1{letter-spacing:-2px}
+ .hero p{font-size:13px}
+ .section{padding:65px 4% 75px}
+ .shop-tools{display:flex;flex-direction:column;align-items:stretch}
+ .search-box{width:100%}
+ .filters{justify-content:center;gap:6px}
+ .filter{padding:9px 11px;font-size:9px}
+ .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+ .product{border-radius:17px}
+ .product-image{height:155px}
+ .product-info{padding:12px}
+ .product-info h3{font-size:13px}
+ .product-description{font-size:10px;min-height:34px}
+ .category-name{font-size:9px}
+ .product-price{font-size:14px}
+ .add-button{padding:9px 10px;font-size:9px}
+ .product-bottom{gap:4px}
+ .promo{padding:25px 18px;flex-direction:column;text-align:center}
+ .promo button{margin-top:8px}
+ .ocean{min-height:500px;padding-top:95px}
+ .ocean h2{letter-spacing:-1px}
 }
-@media(max-width:360px){
-  .product-grid{grid-template-columns:1fr}
-  .product-img{height:210px}
+@media(max-width:370px){
+ .product-image{height:130px}
+ .product-info{padding:10px}
+ .product-info h3{font-size:12px}
+ .product-price{font-size:13px}
+ .add-button{padding:8px}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
 }
 </style>
 </head>
 
 <body>
 
-<!-- SKY -->
-<section class="sky" id="home">
-  <div class="sun"></div>
-  <div class="sun-rays"></div>
-  <div class="cloud c1"></div>
-  <div class="cloud c2"></div>
-  <div class="cloud c3"></div>
-  <div class="bird b1">⌁</div>
-  <div class="bird b2">⌁</div>
-  <div class="bird b3">⌁</div>
+<canvas id="world"></canvas>
+<div class="world-overlay"></div>
 
-  <nav class="nav">
-    <div class="logo">WEB<span>SEA</span></div>
-    <div class="navlinks">
-      <a href="#home">HOME</a>
-      <a href="#shop">SHOP</a>
-      <a href="#categories">CATEGORIES</a>
-      <a href="#about">ABOUT</a>
-    </div>
-    <div class="nav-actions">
-      <button class="nav-btn" onclick="openCart()">🛒 CART <span class="cart-count" id="cartCount">0</span></button>
-    </div>
-  </nav>
+<nav>
+ <div class="logo">WEB<span>SEA</span></div>
 
-  <div class="hero">
-    <span class="eyebrow">WHERE THE SKY MEETS THE OCEAN</span>
-    <h1>DISCOVER A<br>NEW WORLD OF <span>SHOPPING.</span></h1>
-    <p>Explore a world of beautiful products, amazing discoveries and everyday essentials — all in one place.</p>
-    <button class="primary-btn" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">EXPLORE COLLECTION ↗</button>
-    <div class="hero-note">A NEW EXPERIENCE • A NEW WORLD • WEBSEA</div>
-  </div>
+ <div class="nav-links">
+  <a href="#home">HOME</a>
+  <a href="#shop">SHOP</a>
+  <a href="#categories">CATEGORIES</a>
+  <a href="#about">ABOUT</a>
+ </div>
 
-  <div class="wave-wrap"><div class="wave"></div><div class="wave"></div></div>
+ <div class="nav-right">
+  <button class="nav-button" onclick="openCart()">
+   🛒 CART <span class="cart-number" id="cartCount">0</span>
+  </button>
+ </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+ <div class="hero-content">
+  <span class="pill">WHERE THE SKY MEETS THE OCEAN</span>
+  <h1>DISCOVER A<br>NEW WORLD OF<br><span>SHOPPING.</span></h1>
+  <p>Explore a world of beautiful products, amazing discoveries and everyday essentials — all in one place.</p>
+  <button class="main-button" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">
+   EXPLORE COLLECTION ↗
+  </button>
+  <div class="hero-caption">A NEW EXPERIENCE • A NEW WORLD • WEBSEA</div>
+ </div>
 </section>
 
 <!-- SHOP -->
-<section class="shop" id="shop">
-  <div class="section-head">
-    <small>EXPLORE OUR WORLD</small>
-    <h2>Discover the Collection</h2>
-    <p>Find something special for every part of your life.</p>
-  </div>
+<section class="section" id="shop">
+ <div class="section-heading">
+  <small>EXPLORE OUR WORLD</small>
+  <h2>Discover the Collection</h2>
+  <p>Find something special for every part of your life.</p>
+ </div>
 
-  <div class="shop-tools" id="categories">
-    <div class="search">
-      🔍 <input id="searchInput" type="search" placeholder="Search products..." oninput="renderProducts()">
-    </div>
-    <div class="filters">
-      <button class="filter active" onclick="setCategory('All',this)">All</button>
-      <button class="filter" onclick="setCategory('Fashion',this)">Fashion</button>
-      <button class="filter" onclick="setCategory('Electronics',this)">Electronics</button>
-      <button class="filter" onclick="setCategory('Home',this)">Home</button>
-      <button class="filter" onclick="setCategory('Beauty',this)">Beauty</button>
-      <button class="filter" onclick="setCategory('Sports',this)">Sports</button>
-    </div>
+ <div class="shop-tools" id="categories">
+  <div class="search-box">
+   🔍 <input type="search" id="searchInput" placeholder="Search products..." oninput="renderProducts()">
   </div>
-
-  <div class="product-grid" id="productGrid"></div>
-
-  <div class="promo">
-    <div>
-      <h2>Something Amazing Awaits.</h2>
-      <p>Discover your next favourite product with WEBSEA.</p>
-    </div>
-    <button onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">SHOP NOW ↗</button>
+  <div class="filters">
+   <button class="filter active" onclick="setCategory('All',this)">All</button>
+   <button class="filter" onclick="setCategory('Fashion',this)">Fashion</button>
+   <button class="filter" onclick="setCategory('Electronics',this)">Electronics</button>
+   <button class="filter" onclick="setCategory('Home',this)">Home</button>
+   <button class="filter" onclick="setCategory('Beauty',this)">Beauty</button>
+   <button class="filter" onclick="setCategory('Sports',this)">Sports</button>
   </div>
+ </div>
+
+ <div class="product-grid" id="productGrid"></div>
+
+ <div class="promo">
+  <div>
+   <h2>Something Amazing Awaits.</h2>
+   <p>Discover your next favourite product with WEBSEA.</p>
+  </div>
+  <button onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">SHOP NOW ↗</button>
+ </div>
 </section>
 
 <!-- OCEAN -->
 <section class="ocean" id="about">
-  <div class="ocean-light"></div>
-  <div class="sea-life">
-    <span class="fish f1">🐠</span>
-    <span class="fish f2">🐟</span>
-    <span class="fish f3">🐡</span>
-    <span class="bubble" style="left:8%"></span>
-    <span class="bubble"></span>
-    <span class="bubble"></span>
-    <span class="bubble"></span>
-    <span class="bubble"></span>
-    <span class="seaweed left">🌿</span>
-    <span class="seaweed right">🌿</span>
-  </div>
-  <h2>DIVE INTO A NEW WORLD.</h2>
+ <div class="sea-emoji fish-one">🐠</div>
+ <div class="sea-emoji fish-two">🐟</div>
+ <div class="sea-emoji fish-three">🐡</div>
+ <div class="sea-bubble" style="left:8%"></div>
+ <div class="sea-bubble"></div>
+ <div class="sea-bubble"></div>
+ <div class="sea-bubble"></div>
+ <div class="sea-bubble"></div>
+
+ <div class="ocean-content">
+  <span class="ocean-label">WELCOME TO THE DEEP BLUE</span>
+  <h2 style="margin-top:20px">DIVE INTO A NEW WORLD.</h2>
   <p>From the beauty of the sky to the mystery of the deep ocean, WEBSEA brings a fresh shopping experience to your everyday life.</p>
+ </div>
 </section>
 
 <footer>
-  <div class="footer-logo">WEBSEA</div>
-  <p>DISCOVER A NEW WORLD OF SHOPPING</p>
-  <div class="footer-links">
-    <a href="#home">Home</a>
-    <a href="#shop">Shop</a>
-    <a href="#categories">Categories</a>
-    <a href="#about">About</a>
-  </div>
-  <p style="margin-top:25px">© <span id="year"></span> WEBSEA. All rights reserved.</p>
+ <div class="footer-logo">WEBSEA</div>
+ <p>DISCOVER A NEW WORLD OF SHOPPING</p>
+ <div class="footer-links">
+  <a href="#home">Home</a>
+  <a href="#shop">Shop</a>
+  <a href="#categories">Categories</a>
+  <a href="#about">About</a>
+ </div>
+ <p>© <span id="year"></span> WEBSEA. All rights reserved.</p>
 </footer>
 
-<!-- CART -->
+<!-- CART DRAWER -->
 <div class="overlay" id="overlay" onclick="closeCart()"></div>
+
 <aside class="drawer" id="drawer">
-  <div class="drawer-head">
-    <h2 style="color:#075579">Your Cart 🛒</h2>
-    <button class="close-btn" onclick="closeCart()">×</button>
-  </div>
-  <div id="cartItems"></div>
-  <div class="cart-total">
-    <span>Total</span><span id="cartTotal">৳0</span>
-  </div>
-  <button class="checkout-btn" onclick="openCheckout()">PROCEED TO CHECKOUT</button>
+ <div class="drawer-header">
+  <h2>Your Cart 🛒</h2>
+  <button class="close" onclick="closeCart()">×</button>
+ </div>
+ <div id="cartItems"></div>
+ <div class="cart-total">
+  <span>Total</span>
+  <span id="cartTotal">৳0</span>
+ </div>
+ <button class="checkout-button" onclick="openCheckout()">PROCEED TO CHECKOUT</button>
 </aside>
 
-<!-- CHECKOUT -->
+<!-- CHECKOUT MODAL -->
 <div class="modal" id="checkoutModal">
-  <div class="modal-box">
-    <h2>Complete Your Order</h2>
-    <p>Enter your delivery information.</p>
-    <form id="checkoutForm">
-      <input id="customerName" placeholder="Your full name" required>
-      <input id="customerPhone" type="tel" placeholder="Phone number" required>
-      <textarea id="customerAddress" placeholder="Full delivery address" required></textarea>
-      <div class="modal-actions">
-        <button type="button" class="cancel" onclick="closeCheckout()">Cancel</button>
-        <button type="submit" class="confirm">Place Demo Order</button>
-      </div>
-    </form>
-    <div class="demo-warning">
-      Demo checkout only: this website does not yet save orders or process payments. Connect a backend to accept real orders.
-    </div>
+ <div class="modal-content">
+  <h2>Complete Your Order</h2>
+  <p>Enter your delivery information.</p>
+
+  <form id="checkoutForm">
+   <input id="customerName" placeholder="Your full name" required>
+   <input id="customerPhone" type="tel" placeholder="Phone number" required>
+   <textarea id="customerAddress" placeholder="Full delivery address" required></textarea>
+
+   <div class="modal-actions">
+    <button type="button" class="cancel" onclick="closeCheckout()">Cancel</button>
+    <button type="submit" class="confirm">Demo Order</button>
+   </div>
+  </form>
+
+  <div class="notice">
+   This is a demo checkout. Real order submission and payment are not connected yet.
   </div>
+ </div>
 </div>
 
 <script>
-const products = [
+/* PRODUCT DATA */
+const products=[
  {id:1,name:"Classic Fashion Shirt",category:"Fashion",price:850,tag:"POPULAR",desc:"Everyday style and comfort.",image:"https://images.unsplash.com/photo-1603252109303-2751441dd157?w=700"},
  {id:2,name:"Premium Sneakers",category:"Fashion",price:1850,tag:"TRENDING",desc:"Comfortable modern footwear.",image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700"},
  {id:3,name:"Wireless Headphones",category:"Electronics",price:1450,tag:"HOT",desc:"Enjoy your favourite music.",image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=700"},
@@ -611,106 +799,105 @@ const products = [
  {id:12,name:"Bluetooth Speaker",category:"Electronics",price:1650,tag:"MUSIC",desc:"Bring music into every moment.",image:"https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=700"}
 ];
 
-let selectedCategory = "All";
-let cart = JSON.parse(localStorage.getItem("websea_cart") || "[]");
+let category="All";
+let cart=JSON.parse(localStorage.getItem("websea_cart")||"[]");
 
-function money(value){
- return "৳" + Number(value).toLocaleString("en-BD");
+function money(n){
+ return "৳"+Number(n).toLocaleString("en-BD");
 }
 
 function renderProducts(){
- const grid = document.getElementById("productGrid");
- const search = document.getElementById("searchInput").value.toLowerCase().trim();
- const filtered = products.filter(p =>
-  (selectedCategory === "All" || p.category === selectedCategory) &&
-  (p.name.toLowerCase().includes(search) || p.category.toLowerCase().includes(search))
+ const grid=document.getElementById("productGrid");
+ const q=document.getElementById("searchInput").value.toLowerCase().trim();
+
+ const list=products.filter(p=>
+  (category==="All"||p.category===category)&&
+  (p.name.toLowerCase().includes(q)||p.category.toLowerCase().includes(q))
  );
 
- grid.innerHTML = "";
+ grid.innerHTML="";
 
- if(!filtered.length){
-  grid.innerHTML = '<div class="no-results" style="display:block">No products found. Try another search.</div>';
+ if(!list.length){
+  grid.innerHTML='<div class="empty-message" style="display:block">No products found. Try another search.</div>';
   return;
  }
 
- filtered.forEach(p=>{
-  const card = document.createElement("article");
-  card.className = "product";
-  card.innerHTML = `
-   <div class="product-img">
-    <img src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.src='https://placehold.co/600x400/e4faff/087ca8?text=WEBSEA'">
-    <span class="tag">${p.tag}</span>
+ list.forEach(p=>{
+  const card=document.createElement("article");
+  card.className="product";
+  card.innerHTML=`
+   <div class="product-image">
+    <img src="${p.image}" alt="${p.name}" loading="lazy"
+     onerror="this.src='https://placehold.co/600x400/e4faff/087ca8?text=WEBSEA'">
+    <span class="product-tag">${p.tag}</span>
    </div>
    <div class="product-info">
-    <div class="product-category">${p.category}</div>
+    <div class="category-name">${p.category}</div>
     <h3>${p.name}</h3>
-    <p class="product-desc">${p.desc}</p>
-    <div class="price-row">
-     <span class="price">${money(p.price)}</span>
-     <button class="add-btn" onclick="addToCart(${p.id})">+ ADD</button>
+    <div class="product-description">${p.desc}</div>
+    <div class="product-bottom">
+     <span class="product-price">${money(p.price)}</span>
+     <button class="add-button" onclick="addToCart(${p.id})">+ ADD</button>
     </div>
    </div>`;
   grid.appendChild(card);
  });
 }
 
-function setCategory(category,button){
- selectedCategory = category;
- document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
- button.classList.add("active");
+function setCategory(name,btn){
+ category=name;
+ document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));
+ btn.classList.add("active");
  renderProducts();
 }
 
+/* CART */
 function saveCart(){
  localStorage.setItem("websea_cart",JSON.stringify(cart));
  updateCart();
 }
 
 function addToCart(id){
- const found = cart.find(item=>item.id===id);
- if(found) found.qty++;
- else cart.push({id,qty:1});
+ const found=cart.find(x=>x.id===id);
+ if(found)found.qty++;
+ else cart.push({id:id,qty:1});
  saveCart();
- const btn = event?.target;
- if(btn){
-  const old=btn.textContent;
-  btn.textContent="ADDED ✓";
-  setTimeout(()=>btn.textContent=old,900);
- }
 }
 
 function updateCart(){
- const count = cart.reduce((sum,item)=>sum+item.qty,0);
+ const count=cart.reduce((s,x)=>s+x.qty,0);
  document.getElementById("cartCount").textContent=count;
 
- const container=document.getElementById("cartItems");
- container.innerHTML="";
+ const box=document.getElementById("cartItems");
+ box.innerHTML="";
+ let total=0;
 
  if(!cart.length){
-  container.innerHTML='<p style="padding:30px 0;text-align:center;color:#668394">Your cart is empty.</p>';
+  box.innerHTML='<p style="text-align:center;padding:35px;color:#638394">Your cart is empty.</p>';
  }
 
- let total=0;
  cart.forEach(item=>{
   const p=products.find(x=>x.id===item.id);
   if(!p)return;
   total+=p.price*item.qty;
+
   const row=document.createElement("div");
   row.className="cart-item";
   row.innerHTML=`
-   <img src="${p.image}" alt="">
-   <div class="cart-item-info">
-    <b>${p.name}</b>
+   <img src="${p.image}" alt="${p.name}">
+   <div class="cart-item-details">
+    <strong>${p.name}</strong>
     <p>${money(p.price*item.qty)}</p>
-    <div class="qty">
+    <div class="quantity">
      <button onclick="changeQty(${p.id},-1)">−</button>
      <span>${item.qty}</span>
      <button onclick="changeQty(${p.id},1)">+</button>
-     <button class="remove" onclick="removeItem(${p.id})">Remove</button>
+     <button class="remove-item" onclick="removeItem(${p.id})">Remove</button>
     </div>
    </div>`;
-  container.appendChild(row);
+  box.appendChild(row);
  });
+
  document.getElementById("cartTotal").textContent=money(total);
 }
 
@@ -733,6 +920,8 @@ function closeCart(){
  document.getElementById("drawer").classList.remove("open");
  document.getElementById("overlay").classList.remove("show");
 }
+
+/* DEMO CHECKOUT */
 function openCheckout(){
  if(!cart.length){
   alert("Your cart is empty!");
@@ -746,33 +935,30 @@ function closeCheckout(){
 
 document.getElementById("checkoutForm").addEventListener("submit",function(e){
  e.preventDefault();
+
  const name=document.getElementById("customerName").value.trim();
  const phone=document.getElementById("customerPhone").value.trim();
  const address=document.getElementById("customerAddress").value.trim();
 
- if(!name||!phone||!address){
-  alert("Please fill in all delivery details.");
-  return;
- }
+ if(!name||!phone||!address)return;
 
- let summary=cart.map(item=>{
+ let lines=cart.map(item=>{
   const p=products.find(x=>x.id===item.id);
-  return p ? `${p.name} x ${item.qty} = ${money(p.price*item.qty)}` : "";
+  return p?p.name+" x "+item.qty+" = "+money(p.price*item.qty):"";
  }).filter(Boolean).join("\n");
 
- const total=cart.reduce((sum,item)=>{
+ const total=cart.reduce((s,item)=>{
   const p=products.find(x=>x.id===item.id);
-  return sum+(p?p.price*item.qty:0);
+  return s+(p?p.price*item.qty:0);
  },0);
 
  alert(
   "DEMO ORDER PREVIEW\n\n"+
-  "Customer: "+name+"\n"+
+  "Name: "+name+"\n"+
   "Phone: "+phone+"\n"+
   "Address: "+address+"\n\n"+
-  summary+"\n\n"+
-  "Total: "+money(total)+
-  "\n\nThis is a demo only. Your order has NOT been sent or saved."
+  lines+"\n\nTotal: "+money(total)+
+  "\n\nThis order has NOT been sent or saved."
  );
 
  cart=[];
@@ -783,9 +969,260 @@ document.getElementById("checkoutForm").addEventListener("submit",function(e){
 });
 
 document.getElementById("year").textContent=new Date().getFullYear();
-
 renderProducts();
 updateCart();
+
+/* THREE.JS 3D WORLD */
+(function(){
+ if(!window.THREE)return;
+
+ const canvas=document.getElementById("world");
+ let scene,camera,renderer,sun,water,clouds=[],fish=[],bubbles=[];
+ let scrollProgress=0;
+ let clock=new THREE.Clock();
+
+ try{
+  scene=new THREE.Scene();
+  scene.background=new THREE.Color(0x83dff2);
+  scene.fog=new THREE.Fog(0x83dff2,12,65);
+
+  camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,.1,150);
+  camera.position.set(0,4,18);
+  camera.lookAt(0,1,0);
+
+  renderer=new THREE.WebGLRenderer({
+   canvas:canvas,
+   alpha:true,
+   antialias:false,
+   powerPreference:"low-power"
+  });
+  renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));
+  renderer.setSize(innerWidth,innerHeight);
+  renderer.outputEncoding=THREE.sRGBEncoding;
+  renderer.toneMapping=THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure=1.1;
+
+  const ambient=new THREE.AmbientLight(0xffffff,.8);
+  scene.add(ambient);
+
+  const sunlight=new THREE.DirectionalLight(0xfff1bd,2.1);
+  sunlight.position.set(5,10,8);
+  scene.add(sunlight);
+
+  /* SUN */
+  const sunGeometry=new THREE.SphereGeometry(2.1,32,32);
+  const sunMaterial=new THREE.MeshBasicMaterial({color:0xffe58a});
+  sun=new THREE.Mesh(sunGeometry,sunMaterial);
+  sun.position.set(8,7,-16);
+  scene.add(sun);
+
+  const sunGlow=new THREE.PointLight(0xffdf89,3,55);
+  sunGlow.position.copy(sun.position);
+  scene.add(sunGlow);
+
+  /* SUN HALO */
+  const halo=new THREE.Mesh(
+   new THREE.SphereGeometry(2.8,24,24),
+   new THREE.MeshBasicMaterial({
+    color:0xffe7a1,
+    transparent:true,
+    opacity:.12,
+    side:THREE.BackSide
+   })
+  );
+  halo.position.copy(sun.position);
+  scene.add(halo);
+
+  /* CLOUDS */
+  function makeCloud(x,y,z,scale){
+   const group=new THREE.Group();
+   const mat=new THREE.MeshStandardMaterial({
+    color:0xffffff,
+    roughness:1,
+    transparent:true,
+    opacity:.75
+   });
+   const parts=[
+    [-1,0,0,1.1],
+    [0,.35,0,1.35],
+    [1,0,0,1],
+    [.4,-.12,.1,1]
+   ];
+   parts.forEach(a=>{
+    const mesh=new THREE.Mesh(new THREE.SphereGeometry(a[3],16,12),mat);
+    mesh.position.set(a[0],a[1],a[2]);
+    group.add(mesh);
+   });
+   group.position.set(x,y,z);
+   group.scale.setScalar(scale);
+   scene.add(group);
+   clouds.push(group);
+  }
+
+  makeCloud(-8,5,-10,1.2);
+  makeCloud(1,8,-18,.8);
+  makeCloud(-13,1,-15,.7);
+  makeCloud(13,4,-12,.9);
+
+  /* OCEAN PLANE */
+  const waterGeometry=new THREE.PlaneGeometry(100,100,70,70);
+  const waterMaterial=new THREE.MeshStandardMaterial({
+   color:0x058eb4,
+   roughness:.25,
+   metalness:.25,
+   transparent:true,
+   opacity:.96,
+   side:THREE.DoubleSide
+  });
+  water=new THREE.Mesh(waterGeometry,waterMaterial);
+  water.rotation.x=-Math.PI/2;
+  water.position.set(0,-2,0);
+  scene.add(water);
+
+  const originalPositions=waterGeometry.attributes.position.array.slice();
+
+  /* UNDERWATER BUBBLES */
+  const bubbleMaterial=new THREE.MeshBasicMaterial({
+   color:0xb9f6ff,
+   transparent:true,
+   opacity:.45
+  });
+
+  for(let i=0;i<35;i++){
+   const size=.04+Math.random()*.09;
+   const b=new THREE.Mesh(
+    new THREE.SphereGeometry(size,8,8),
+    bubbleMaterial
+   );
+   b.position.set((Math.random()-.5)*35,-Math.random()*12,Math.random()*-18);
+   b.userData.speed=.5+Math.random()*1.2;
+   scene.add(b);
+   bubbles.push(b);
+  }
+
+  /* SIMPLE 3D FISH */
+  function makeFish(x,y,z,size,color){
+   const group=new THREE.Group();
+
+   const body=new THREE.Mesh(
+    new THREE.SphereGeometry(.45,16,12),
+    new THREE.MeshStandardMaterial({color:color,roughness:.5})
+   );
+   body.scale.set(1.5,.65,.6);
+   group.add(body);
+
+   const tail=new THREE.Mesh(
+    new THREE.ConeGeometry(.34,.65,4),
+    new THREE.MeshStandardMaterial({color:color})
+   );
+   tail.rotation.z=-Math.PI/2;
+   tail.position.x=-.85;
+   group.add(tail);
+
+   const eye=new THREE.Mesh(
+    new THREE.SphereGeometry(.055,8,8),
+    new THREE.MeshBasicMaterial({color:0x102b38})
+   );
+   eye.position.set(.45,.13,.25);
+   group.add(eye);
+
+   group.position.set(x,y,z);
+   group.scale.setScalar(size);
+   group.userData.speed=.6+Math.random()*.6;
+   scene.add(group);
+   fish.push(group);
+  }
+
+  makeFish(-7,-2.4,-5,.9,0xffbd47);
+  makeFish(6,-3,-9,.65,0xff7e69);
+  makeFish(-2,-4,-7,.55,0x68e5db);
+  makeFish(9,-2,-13,.75,0xffe17a);
+
+  /* SCROLL CONTROLS */
+  function updateScroll(){
+   const max=document.documentElement.scrollHeight-innerHeight;
+   scrollProgress=max>0?window.scrollY/max:0;
+  }
+  window.addEventListener("scroll",updateScroll,{passive:true});
+  updateScroll();
+
+  const skyColor=new THREE.Color(0x83dff2);
+  const deepColor=new THREE.Color(0x012b50);
+  const tempColor=new THREE.Color();
+
+  function animate(){
+   requestAnimationFrame(animate);
+   const t=clock.getElapsedTime();
+
+   const p=THREE.MathUtils.smoothstep(scrollProgress,.08,.72);
+
+   /* SKY TO DEEP OCEAN */
+   tempColor.copy(skyColor).lerp(deepColor,p);
+   scene.background.copy(tempColor);
+   scene.fog.color.copy(tempColor);
+
+   camera.position.y=4-p*5.5;
+   camera.position.z=18-p*3;
+   camera.lookAt(0,1-p*3,0);
+
+   sun.position.y=7-p*9;
+   sun.material.color.setHex(p>.55?0x65b9d0:0xffe58a);
+   sunGlow.intensity=3*(1-p*.85);
+   halo.material.opacity=.12*(1-p);
+
+   /* WATER WAVES */
+   const pos=waterGeometry.attributes.position;
+   for(let i=0;i<pos.count;i++){
+    const x=originalPositions[i*3];
+    const y=originalPositions[i*3+1];
+    const wave=
+     Math.sin(x*.19+t*1.2)*.12+
+     Math.cos(y*.23+t*.9)*.10;
+    pos.array[i*3+2]=wave;
+   }
+   pos.needsUpdate=true;
+   waterGeometry.computeVertexNormals();
+
+   water.position.y=-2+p*1.4;
+   water.material.opacity=.15+p*.83;
+   water.material.color.setHex(p>.5?0x034b7c:0x0b9bb9);
+
+   clouds.forEach((c,i)=>{
+    c.position.x+=.003+(i%2)*.001;
+    if(c.position.x>20)c.position.x=-20;
+    c.position.y+=Math.sin(t*.35+i)*.0008;
+   });
+
+   fish.forEach((f,i)=>{
+    f.position.x+=f.userData.speed*.012;
+    f.position.y+=Math.sin(t*1.4+i)*.003;
+    if(f.position.x>20)f.position.x=-20;
+   });
+
+   bubbles.forEach(b=>{
+    b.position.y+=b.userData.speed*.012;
+    if(b.position.y>4){
+     b.position.y=-10-Math.random()*5;
+     b.position.x=(Math.random()-.5)*35;
+    }
+   });
+
+   renderer.render(scene,camera);
+  }
+  animate();
+
+  window.addEventListener("resize",()=>{
+   camera.aspect=innerWidth/innerHeight;
+   camera.updateProjectionMatrix();
+   renderer.setSize(innerWidth,innerHeight);
+   renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));
+  });
+
+ }catch(error){
+  console.log("3D background unavailable:",error);
+ }
+})();
 </script>
+
 </body>
 </html>
